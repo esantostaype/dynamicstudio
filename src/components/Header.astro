@@ -1,0 +1,48 @@
+---
+import { User } from '@/components/Icons'
+
+interface Nav {
+  label: string
+  path: string
+}
+
+const nav:Nav[] = [
+  {
+    label: "Home",
+    path: "/"
+  },
+  {
+    label: "Services",
+    path: "/services"
+  },
+  {
+    label: "Work",
+    path: "/work"
+  },
+  {
+    label: "About Us",
+    path: "/about-us"
+  },
+  {
+    label: "Contact Us",
+    path: "/contact-us"
+  }
+]
+---
+
+<header class="flex justify-between items-center p-8 relative">
+  <a href="/"><img src="/images/logo.svg" width="220" alt="Dynamic Studio"></a>
+  <nav>
+    <ul class="flex gap-6">
+      { nav.map(( item ) => (
+        <li>
+          <a href={ item.path }>{ item.label }</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <a href="/" class="bg-[rgba(255,255,255,0.06)] text-dyn-green-400 flex font-semibold gap-2 items-center py-3 px-4 rounded text-xs uppercase">
+    <User width='16'/>
+    Clients Zone
+  </a>
+</header>

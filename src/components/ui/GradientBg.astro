@@ -1,0 +1,48 @@
+---
+interface Props {
+	color: "purple" | "blue" | "red"
+  position: "center" | "left" | "right"
+  className?: string
+}
+
+const { color, position, className } = Astro.props
+
+let bgElement = ""
+let posElement = ""
+
+switch ( color ) {
+  case "purple":
+    bgElement = "bg-[#3700FF]"
+    break
+  case "blue":
+    bgElement = "bg-[#006b6b]"
+    break
+  case "red":
+    bgElement = "bg-[#790050]"
+    break
+  default:
+    bgElement = ""
+    break
+}
+
+switch ( position ) {
+  case "center":
+    posElement = "left-1/2 -translate-x-1/2"
+    break
+  case "left":
+    posElement = "-left-[640px]"
+    break
+  case "right":
+    posElement = "-right-[640px]"
+    break
+  default:
+    posElement = ""
+    break
+}
+---
+<div class={
+  `${ className }
+  ${ posElement }
+  ${ bgElement }
+  absolute -z-10 size-[1280px] blur-[240px] rounded-full opacity-20`
+}/>

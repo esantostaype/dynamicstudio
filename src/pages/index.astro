@@ -1,16 +1,11 @@
 ---
-
+import GradientBg from '@/components/ui/GradientBg.astro'
+import TextAccent from '@/components/ui/TextAccent.astro'
+import Layout from '@/layouts/layout.astro'
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Dynamic Studio" description="Dynamic Studio Description">
+	<h1 class="text-7xl"><TextAccent>Dynamic Studio</TextAccent></h1>
+	<div class="size-1 dyn-gradient"></div>
+	<GradientBg position='left' color='blue' />
+</Layout>

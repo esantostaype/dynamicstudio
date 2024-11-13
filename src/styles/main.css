@@ -1,3 +1,5 @@
+@import '@/styles/locomotive-scroll.css';
+
 :root {
   --background: #0A0A20;
   --dyn-green-50: #eeffe4;

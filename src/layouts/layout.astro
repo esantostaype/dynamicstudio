@@ -12,9 +12,9 @@ const { title, description, image } = Astro.props
 <!doctype html>
 <html lang="en">
 	<Head title={ title } description={ description } image={ image } />
-	<body>
-		<Header/>
-		<main>
+	<body data-scroll-container>
+		<Header transition:persist />
+		<main data-scroll-section class="mix-blend-screen">
 			<slot/>
 		</main>
 	</body>
@@ -23,3 +23,13 @@ const { title, description, image } = Astro.props
 <style is:global>
 	@import '@/styles/main.css';
 </style>
+
+<script>
+	import LocomotiveScroll from 'locomotive-scroll'
+	document.addEventListener("astro:page-load", () => {
+		new LocomotiveScroll({
+			el: document.querySelector("[data-scroll-container]") as HTMLElement,
+			smooth: true
+		}
+	)})
+</script>

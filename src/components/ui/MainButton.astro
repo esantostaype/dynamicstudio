@@ -1,0 +1,15 @@
+---
+import { Arrow } from '@/components/Icons'
+
+interface Props {
+	path?: string
+}
+const { path } = Astro.props
+---
+
+<button class="group flex font-bold gap-3 items-center px-8 py-3 rounded-[4rem] dyn-gradient text-lg text-background">
+  <slot/>
+  <div class="group-hover:ml-2 group-hover:-mr-2 transition-all duration-300 ease-in-out">
+    <Arrow width='16' />
+  </div>
+</button>

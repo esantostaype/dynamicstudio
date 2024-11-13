@@ -2,13 +2,17 @@
 import IsoVideo from '@/components/home/IsoVideo.astro'
 import GradientBg from '@/components/ui/GradientBg.astro'
 import GridBg from '@/components/ui/GridBg.astro'
+import MainButton from '@/components/ui/MainButton.astro'
 import TextAccent from '@/components/ui/TextAccent.astro'
 ---
 
-<section class="flex items-center justify-center h-dvh mx-auto max-w-7xl relative w-full">
-  <div class="font-light relative text-center z-10">
+<section class="flex items-center justify-center h-dvh mx-auto max-w-7xl relative top-0 w-full">
+  <div class="font-light flex flex-col items-center relative text-center z-10">
     <h1 class="leading-none mb-8 text-[5.6rem]">Digital solutions<br>tailored to <TextAccent>your budget.</TextAccent></h1>
-    <h2 class="leading-[1.35em] text-[2rem] max-w-3xl mx-auto"><strong class="font-medium">Web Design</strong>, <strong class="font-medium">Custom Software</strong> & <strong class="font-medium">Branding</strong> to elevate your business and stand out online.</h2>
+    <h2 class="leading-[1.35em] text-[2rem] max-w-3xl"><strong class="font-medium">Web Design</strong>, <strong class="font-medium">Custom Software</strong> & <strong class="font-medium">Branding</strong> to elevate your business and stand out online.</h2>
+    <div class="mt-12">
+      <MainButton>Get a Quote Now</MainButton>
+    </div>
   </div>
 	<IsoVideo/>
   <GridBg/>

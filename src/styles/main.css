@@ -25,6 +25,13 @@
   --dyn-gradient: linear-gradient(45deg, var(--dyn-green-400) 0%, var(--dyn-cyan-400) 100%);
   color-scheme: dark;
 }
+
+::selection { 
+  background: var(--dyn-green-400);
+  color: var(--background);
+  -webkit-text-fill-color: initial;
+}
+
 @font-face {
   font-family: 'IBM Plex Sans';
   src: url('/fonts/IBMPlexSans-Italic.woff2') format('woff2');
@@ -111,7 +118,7 @@ html {
   font-family: "IBM Plex Sans";
   font-weight: 400;
   overflow-x: hidden;
-  scrollbar-gutter: stable;
+  scrollbar-width: none;
 }
 
 p{
@@ -127,5 +134,8 @@ p:last-child{
 }
 
 .dyn-gradient{
-  background: var(--dyn-gradient);
+  background: linear-gradient(90deg, var(--c1, var(--dyn-green-400)), var(--c2, var(--dyn-cyan-400)) 51%, var(--c1, var(--dyn-green-400))) var(--x, 0)/ 200%;
+  transition: all 0.3s ease-in-out;
 }
+
+.dyn-gradient:hover { --x: 100%; }

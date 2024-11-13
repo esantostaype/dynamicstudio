@@ -17,7 +17,7 @@ const nav = [
 ---
 
 <header class="flex fixed items-center justify-between left-0 px-6 top-0 w-full z-50 transition-all duration-300">
-  <a href="/"><img src="/images/logo.svg" width="220" alt="Dynamic Studio"></a>
+  <a href="/"><img src="/images/logo.svg" width="220" height="32" alt="Dynamic Studio"></a>
   <nav class="flex gap-4">
     { nav.map(({ label, path, active }) => (
       <a class={`hover:text-dyn-green-400 py-8 px-4 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} href={ path }>

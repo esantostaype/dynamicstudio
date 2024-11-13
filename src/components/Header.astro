@@ -1,31 +1,31 @@
 ---
 import { User } from '@/components/Icons'
 const { pathname } = Astro.url
+const normalizedPathName =
+	pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
 
-interface Nav {
-  label: string
-  path: string
-}
-
-const nav:Nav[] = [
+const nav = [
   { label: "Home", path: "/" },
-  { label: "Services", path: "/services" },
+  { label: "Services", path: "/services", active: normalizedPathName.startsWith("/services") },
   { label: "Work", path: "/work" },
   { label: "About Us", path: "/about-us" },
   { label: "Contact Us", path: "/contact-us" }
-]
+].map((item) => ({
+	...item,
+	active: item.active ?? normalizedPathName === item.path,
+}))
 ---
 
 <header class="flex fixed items-center justify-between left-0 px-8 top-0 w-full z-50">
   <a href="/"><img src="/images/logo.svg" width="220" alt="Dynamic Studio"></a>
   <nav class="flex gap-4">
-    { nav.map(( item ) => {
-      return(
-      <a class={`hover:text-dyn-green-400 py-6 px-4 relative transition-all duration-300 ${ pathname === item.path ? "text-dyn-green-400" : "" }`} href={ item.path }>
-        { item.label }
-        { pathname === item.path && <span class="absolute left-0 top-0 w-full h-[2px] bg-dyn-green-400" transition:name="active"></span> }
+    { nav.map(({ label, path, active }) => (
+      <a class={`hover:text-dyn-green-400 py-6 px-4 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} href={ path }>
+        { label }
+        { active && <span class="absolute left-0 top-0 w-full h-[2px] bg-dyn-green-400" transition:name="active"></span> }
       </a>
-    )})}
+      ))
+    }
   </nav>
   <a href="/" class="bg-[rgba(255,255,255,0.06)] hover:bg-[rgba(255,255,255,0.12)] text-dyn-green-400 flex font-semibold gap-2 items-center py-3 px-4 rounded text-xs transition-all duration-300 uppercase">
     <User width='16'/>

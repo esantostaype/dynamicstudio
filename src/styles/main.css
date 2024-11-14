@@ -141,3 +141,75 @@ p:last-child{
 }
 
 .dyn-gradient:hover { --x: 100%; }
+
+.nav-button{
+  align-items: center;
+  border-radius: 52px;
+  cursor: pointer;
+  height: 32px;
+  justify-content: center;
+  transition-duration: .6s;
+  transition-timing-function: cubic-bezier(.75,0,.25,1);
+  width: 32px;
+}
+
+.nav-button:hover{
+  transform: rotate(45deg);
+}
+
+.nav-button__wrapper{
+  cursor: pointer;
+  height: 21px;
+  position: relative;
+  width: 21px;
+}
+
+.nav-button__dot{
+  background: white;
+  border-radius:3px;
+  height: 3px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition-duration: .6s;
+  transition-timing-function: cubic-bezier(.75,0,.25,1);
+  width: 3px;
+}
+
+.nav-button__dot:nth-child(even) {
+  left: calc(50% - (3px / 2));
+}
+
+.nav-button__dot:nth-child(3),
+.nav-button__dot:nth-child(6),
+.nav-button__dot:nth-child(9) {
+  left: calc(100% - (3px));
+}
+
+.nav-button__dot:nth-child(4),
+.nav-button__dot:nth-child(5),
+.nav-button__dot:nth-child(6) {
+  top: calc(50% - (3px / 2));
+}
+
+.nav-button__dot:nth-child(7),
+.nav-button__dot:nth-child(8),
+.nav-button__dot:nth-child(9) {
+  top: calc(100% - (3px));
+}
+
+.nav-button:hover .nav-button__dot:nth-child(2) {
+  transform: translateY(9px);
+}
+
+.nav-button:hover .nav-button__dot:nth-child(5) {
+  transform: translateX(9px);
+}
+
+.nav-button:hover .nav-button__dot:nth-child(6) {
+  transform: translateX(-9px);
+}
+
+.nav-button:hover .nav-button__dot:nth-child(8) {
+  transform: translateY(-9px);
+}

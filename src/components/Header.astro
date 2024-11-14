@@ -16,9 +16,9 @@ const nav = [
 }))
 ---
 
-<header class="flex fixed items-center justify-between left-0 px-6 top-0 w-full z-50 transition-all duration-300">
+<header class="flex fixed items-center justify-between left-0 px-6 py-6 xl:py-0 top-0 w-full z-50 transition-all duration-300">
   <a href="/"><img src="/images/logo.svg" width="220" height="32" alt="Dynamic Studio"></a>
-  <nav class="flex gap-4">
+  <nav class="xl:flex gap-4 hidden">
     { nav.map(({ label, path, active }) => (
       <a class={`hover:text-dyn-green-400 py-8 px-4 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} href={ path }>
         { label }
@@ -56,7 +56,7 @@ const nav = [
 
 <style>
   .onScroll {
-    background-color: rgba(20, 20, 64, 0.8);
+    background-color: rgba(0, 0, 40, 0.8);
     backdrop-filter: blur(32px);
   }
 </style>

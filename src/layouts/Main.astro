@@ -14,7 +14,7 @@ const { title, description, image } = Astro.props
 	<Head title={ title } description={ description } image={ image } />
 	<body data-scroll-container>
 		<Header transition:persist />
-		<main data-scroll-section class="mix-blend-screen">
+		<main data-scroll-section class="mix-blend-screen overflow-x-hidden">
 			<slot/>
 		</main>
 	</body>

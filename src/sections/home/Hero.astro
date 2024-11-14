@@ -8,14 +8,51 @@ import TextAccent from '@/components/ui/TextAccent.astro'
 ---
 
 <Container className="flex items-center justify-center h-dvh relative top-0">
-  <div class="font-light flex flex-col items-center relative text-center z-10">
-    <h1 class="leading-none mb-8 text-5xl md:text-7xl xl:text-[5.6rem] animate-fade-up animate-duration-1000 animate-ease-in-out">Digital solutions<br>tailored to<br class="block md:hidden"><TextAccent>your budget.</TextAccent></h1>
-    <h2 class="xl:leading-[1.35em] text-xl md:text-3xl xl:text-[2rem] max-w-3xl animate-fade-up animate-duration-1000 animate-delay-[100ms] animate-ease-in-out"><strong class="font-medium">Web Design</strong>, <strong class="font-medium">Custom Software</strong> & <strong class="font-medium">Branding</strong> to elevate your business and stand out online.</h2>
-    <div class="mt-12 animate-fade-up animate-duration-1000 animate-delay-[200ms] animate-ease-in-out">
+  <div class="font-light flex flex-col items-center relative text-center z-10" data-scroll data-scroll-speed="-1">
+    <h1 class="reveal-up leading-none mb-8 text-5xl md:text-7xl xl:text-[5rem] 2xl:text-[5.6rem]">Digital solutions<br>tailored to<br class="block md:hidden"><TextAccent>your budget.</TextAccent></h1>
+    <h2 class="reveal-up xl:leading-[1.35em] text-xl md:text-3xl xl:text-[1.8rem] 2xl:text-[2rem] max-w-3xl"><strong class="font-medium">Web Design</strong>, <strong class="font-medium">Custom Software</strong> & <strong class="font-medium">Branding</strong> to elevate your business and stand out online.</h2>
+    <div class="reveal-up button mt-12">
       <MainButton>Get a Quote Now</MainButton>
     </div>
   </div>
-  <IsoVideo/>
+	<IsoVideo/>
   <GridBg/>
   <GradientBg position='center' color='purple'/>
 </Container>
+
+<style>
+  .reveal-up {
+		opacity: 0;
+		transform: translate3d(0, 120px, 0);
+		transition: all cubic-bezier(0.32,0.72,0,1) 1.2s;
+		visibility: hidden;
+	}
+
+	.reveal-up__visible {
+		visibility: visible;
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+
+	h1.reveal-up {
+		transition-delay: 0ms;
+	}
+
+	h2.reveal-up {
+		transition-delay: 40ms;
+	}
+
+	.button {
+		transition-delay: 80ms;
+	}
+</style>
+
+<script>
+	import { RevealUp, RevealFade } from "@/js/reveal"
+  document.addEventListener('astro:page-load', () => {
+    const revealUp = new RevealUp();
+    revealUp.observe()
+    const revealFade = new RevealFade()
+    revealFade.observe()
+  })
+</script>

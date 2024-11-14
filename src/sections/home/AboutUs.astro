@@ -1,0 +1,55 @@
+---
+import Container from '@/components/Container.astro'
+import TextAccent from '@/components/ui/TextAccent.astro'
+---
+
+<Container className="flex flex-col md:flex-row items-center gap-8 md:gap-16 justify-between mt-8 sm:mt-24 md:mt-40">
+  <div class="text-lg sm:text-xl md:text-2xl leading-normal flex-[4] reveal-fade">
+    <h2 class="font-medium text-2xl sm:text-3xl md:text-4xl mb-2">We are <TextAccent>Dynamic Studio.</TextAccent></h2>
+    <p>We help you overcome your biggest challenges, unlocking your business's full potential with premium solutions at a price that works for you. Your brand is our passion, and your success is our greatest achievement.</p>
+  </div>
+  <div class="flex-[5] relative reveal-fade w-full">
+    <div class="relative md:inline-block">
+      <img 
+        src="/images/dynamic-studio-process.webp" 
+        alt="Dynamic Studio Process" 
+        class="md:absolute right-0 -top-36 z-10" 
+        data-scroll 
+        data-scroll-speed="0.2"
+      >
+      <img 
+        src="/images/dynamic-studio-dashboard.webp" 
+        alt="Dynamic Studio Dashboard" 
+        class="rounded-lg md:rounded-2xl w-[80%] xl:w-auto" 
+        data-scroll 
+        data-scroll-speed="-0.4"
+      >
+    </div>
+    <img 
+      src="/images/dynamic-studio-app-mobile.webp"
+      alt="Dynamic Studio App Mobile" 
+      class="absolute -bottom-[20%] md:bottom-auto md:top-16 right-0 xl:-right-20 2xl:right-0 w-[34%] xl:auto" 
+      data-scroll 
+      data-scroll-speed="1"
+    >
+  </div>
+</Container>
+
+<style>
+  .reveal-fade {
+    opacity: 0;
+    transition: all 1s ease;
+  }
+
+  .reveal-fade__visible {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  import { RevealFade } from "@/js/reveal"
+  document.addEventListener("astro:page-load", () => {
+    const reveal = new RevealFade()
+    reveal.observe()
+  })
+</script>

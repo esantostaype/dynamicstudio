@@ -1,11 +1,12 @@
 ---
-import { User } from '@/components/Icons'
-import { NavMobile } from '@/components/NavMobile'
 const { pathname } = Astro.url
+import NavMobile from '@/components/NavMobile.astro'
+import ClientsZoneButton from '@/components/ui/ClientsZoneButton.astro'
+import type { Nav } from '@/interfaces'
 const normalizedPathName =
 	pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
 
-const nav = [
+const nav: Nav[] = [
   { label: "Home", path: "/" },
   { label: "Services", path: "/services", active: normalizedPathName.startsWith("/services") },
   { label: "Work", path: "/work", active: normalizedPathName.startsWith("/work") },
@@ -28,11 +29,8 @@ const nav = [
       ))
     }
   </nav>
-  <a href="/" class="hidden xl:flex bg-[rgba(255,255,255,0.06)] hover:bg-[rgba(255,255,255,0.12)] text-dyn-green-400 font-semibold gap-2 items-center py-3 px-4 rounded text-xs transition-all duration-300 uppercase">
-    <User width='16'/>
-    Clients Zone
-  </a>
-  <NavMobile nav={ nav } client:load/>
+  <div class="hidden xl:block"><ClientsZoneButton/></div>
+  <NavMobile nav={ nav }/>
 </header>
 
 <script>

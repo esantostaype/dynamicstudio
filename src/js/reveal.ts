@@ -21,7 +21,7 @@ export class RevealFade {
       },
       {
         threshold: 0.1,
-        rootMargin: '50px'
+        rootMargin: '1px'
       }
     )
   }
@@ -74,7 +74,7 @@ export class RevealUp {
       },
       {
         threshold: 0.1,
-        rootMargin: '20px'
+        rootMargin: '1px'
       }
     );
   }

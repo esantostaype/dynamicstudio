@@ -141,3 +141,12 @@ p:last-child{
 }
 
 .dyn-gradient:hover { --x: 100%; }
+
+.reveal-fade {
+  opacity: 0;
+  transition: all cubic-bezier(0.32,0.72,0,1) 2s;
+}
+
+.reveal-fade__visible {
+  opacity: 1;
+}

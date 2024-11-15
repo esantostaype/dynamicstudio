@@ -1,6 +1,7 @@
 ---
 import type { Nav } from '@/interfaces'
 import ClientsZoneButton from '@/components/ui/ClientsZoneButton.astro'
+import { Close } from './Icons'
 
 interface Props {
   nav: Nav[]
@@ -8,7 +9,7 @@ interface Props {
 const { nav } = Astro.props
 ---
 
-<button class="open-nav size-10 -mr-2 items-center justify-center flex xl:hidden">
+<button class="open-nav-button size-10 -mr-2 items-center justify-center flex xl:hidden">
   <div class="cursor-pointer relative size-[21px]">
     <span class="dot"></span>
     <span class="dot"></span>
@@ -22,9 +23,12 @@ const { nav } = Astro.props
   </div>
 </button>
 <section class='nav-mobile fixed h-dvh w-full top-0 left-0'>
-  <div class="close-nav fixed h-dvh w-full inset-0 bg-[rgba(10,10,32,0.8)]  z-[9999]" />
-  <div class="nav-mobile__content">
-    <nav class="flex flex-col pt-7 gap-2">
+  <div class="close-nav-bg fixed h-dvh w-full inset-0 bg-[rgba(10,10,32,0.8)]  z-10" />
+  <div class="nav-mobile__content bg-background">
+    <button class="close-nav-button absolute flex items-center justify-center rounded-full top-3 right-3 size-10 bg-[rgba(255,255,255,0.06)] z-20">
+      <Close width='12'/>
+    </button>
+    <nav class="flex flex-col pt-7 gap-2 relative z-10">
       { nav.map(({ label, path, active }) => (
         <a class={`hover:text-dyn-green-400 py-1 px-8 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} href={ path }>
           { label }
@@ -40,21 +44,33 @@ const { nav } = Astro.props
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const openNavButton = document.querySelector(".open-nav") as HTMLElement
-    const closeNavButton = document.querySelector(".close-nav") as HTMLElement
+    const openNavButton = document.querySelector(".open-nav-button") as HTMLElement
+    const closeNavButton = document.querySelector(".close-nav-button") as HTMLElement
+    const closeNavBg = document.querySelector(".close-nav-bg") as HTMLElement
     const navMobile = document.querySelector(".nav-mobile") as HTMLElement
+    const htmlElement = document.documentElement
 
     openNavButton.addEventListener('click',()=>{
       navMobile.classList.add("active")
+      htmlElement.classList.add("open-nav")
     })
 
     closeNavButton.addEventListener('click',()=>{
       navMobile.classList.remove("active")
+      htmlElement.classList.remove("open-nav")
+    })
+
+    closeNavBg.addEventListener('click',()=>{
+      navMobile.classList.remove("active")
+      htmlElement.classList.remove("open-nav")
     })
   })
 </script>
 
 <style>
+  html.open-nav{
+    overflow-y: hidden;
+  }
   .nav-mobile{
     opacity: 0;
     visibility: hidden;
@@ -65,7 +81,6 @@ const { nav } = Astro.props
     visibility: visible;
   }
   .nav-mobile__content{
-    backdrop-filter: blur(40px);
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.5rem 0 0;
@@ -83,7 +98,7 @@ const { nav } = Astro.props
     transition: all cubic-bezier(0.32,0.72,0,1) 0.5s;
     top: 1rem;
     width: 18rem;
-    z-index: 9999;
+    z-index: 20;
   }
 
   .active .nav-mobile__content{

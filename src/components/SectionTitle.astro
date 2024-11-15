@@ -6,7 +6,7 @@ interface Props {
 }
 const { title, subtitle, className } = Astro.props
 ---
-<div class={`${ className } mb-8 md:mb-16`}>
-  <h3 class="opacity-60 uppercase font-normal">{ subtitle }</h3>
-  <h4 class="text-3xl md:text-4xl lx:text-5xl font-medium">{ title }</h4>
+<div class={`${ className } mb-8 md:mb-16 relative`}>
+  <h3 class="opacity-60 uppercase font-normal leading-none mb-3">{ subtitle }</h3>
+  <h4 class="text-3xl md:text-4xl lg:text-5xl font-medium">{ title }</h4>
 </div>

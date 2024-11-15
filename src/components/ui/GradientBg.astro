@@ -30,10 +30,10 @@ switch ( position ) {
     posElement = "left-1/2 -translate-x-1/2"
     break
   case "left":
-    posElement = "-left-[640px]"
+    posElement = "-left-[400px] md:-left-[500px] xl:-left-[800px]"
     break
   case "right":
-    posElement = "-right-[640px]"
+    posElement = "-right-[400px] md:-right-[500px] xl:-right-[800px]"
     break
   default:
     posElement = ""
@@ -41,8 +41,8 @@ switch ( position ) {
 }
 ---
 <div class={
-  `${ className }
+  `${ className && className }
   ${ posElement }
   ${ bgElement }
-  absolute -bottom-[640px] -z-10 size-[1280px] blur-[240px] rounded-full opacity-20 mix-blend-lighten`
+  absolute -bottom-[400px] md:-bottom-[500px] xl:-bottom-[800px] -z-10 size-[800px] md:size-[1000px] xl:size-[1280px] blur-[240px] rounded-full opacity-20 mix-blend-lighten`
 }/>

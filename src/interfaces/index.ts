@@ -9,3 +9,9 @@ export interface Service {
   title: string
   image: string
 }
+
+export interface Project {
+  path: string
+  title: string
+  image: string
+}

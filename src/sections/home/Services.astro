@@ -28,12 +28,12 @@ const services: Service[] = [
 
 ---
 
-<Container className="mt-32 md:mt-40">
-  <SectionTitle className='max-w-xl reveal-fade' title='Unlock Revenue Growth for Your Business' subtitle='What we offer' />
-  <ul class="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-3 md:gap-6">
+<Container className="mt-32 md:mt-60">
+  <SectionTitle className='max-w-xl reveal-fade z-50' title='Unlock Revenue Growth for Your Business' subtitle='What we offer' />
+  <ul class="grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] 2xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 md:gap-6">
     { services.map(( service, index ) => (
-      <li class="reveal-up-categories group reveal-fade">
-        <a href={ service.path } class="aspect-square flex items-center p-4 md:p-8 bg-black overflow-hidden relative rounded-lg" data-scroll data-scroll-speed={`-${ index }`}>
+      <li class="group reveal-fade">
+        <a href={ service.path } class="aspect-square flex items-center p-4 md:p-8 overflow-hidden relative rounded-lg" data-scroll data-scroll-speed={`-${ index }.4`}>
           <h2 class="font-medium relative z-20 text-xl md:text-3xl leading-tight group-hover:text-dyn-green-400 transition-all duration-300">{ service.title }</h2>
           <img width="410" height="302" alt={`Dynamic Studio ${ service.title }`} src={ service.image } alt={ service.title } class="absolute h-full w-full top-0 left-0 z-10 object-cover opacity-40 group-hover:scale-125 group-hover:opacity-20 group-hover:rotate-12 transition-all duration-500" />
         </a>

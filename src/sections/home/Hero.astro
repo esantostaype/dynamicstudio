@@ -46,13 +46,3 @@ import TextAccent from '@/components/ui/TextAccent.astro'
 		transition-delay: 80ms;
 	}
 </style>
-
-<script>
-	import { RevealUp, RevealFade } from "@/js/reveal"
-  document.addEventListener('astro:page-load', () => {
-    const revealUp = new RevealUp();
-    revealUp.observe()
-    const revealFade = new RevealFade()
-    revealFade.observe()
-  })
-</script>

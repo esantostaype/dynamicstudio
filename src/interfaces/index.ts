@@ -5,13 +5,14 @@ export interface Nav {
 }
 
 export interface Service {
-  path: string
+  slug: string
   title: string
   image: string
 }
 
 export interface Project {
-  path: string
+  slug: string
   title: string
   image: string
+  category: string
 }

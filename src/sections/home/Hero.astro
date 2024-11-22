@@ -3,7 +3,7 @@ import Container from '@/components/Container.astro'
 import IsoVideo from '@/components/home/IsoVideo.astro'
 import GradientBg from '@/components/ui/GradientBg.astro'
 import GridBg from '@/components/ui/GridBg.astro'
-import MainButton from '@/components/ui/MainButton.astro'
+import { MainButton } from '@/components'
 import TextAccent from '@/components/ui/TextAccent.astro'
 ---
 
@@ -12,7 +12,7 @@ import TextAccent from '@/components/ui/TextAccent.astro'
     <h1 class="reveal-up leading-none mb-8 text-5xl md:text-7xl xl:text-[5rem] 2xl:text-[5.6rem]">Digital solutions<br>tailored to<br class="block md:hidden"><TextAccent>your budget.</TextAccent></h1>
     <h2 class="reveal-up xl:leading-[1.35em] text-xl md:text-3xl xl:text-[1.8rem] 2xl:text-[2rem] max-w-3xl"><strong class="font-medium">Web Design</strong>, <strong class="font-medium">Custom Software</strong> & <strong class="font-medium">Branding</strong> to elevate your business and stand out online.</h2>
     <div class="reveal-up button mt-12">
-      <MainButton>Get a Quote Now</MainButton>
+      <MainButton client:only>Get a Quote Now</MainButton>
     </div>
   </div>
 	<GridBg/>

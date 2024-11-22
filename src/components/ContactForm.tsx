@@ -15,10 +15,10 @@ export const ContactForm = () => {
   const [ submitted, setSubmitted ] = useState( false )
 
   const initialValues: FormData = {
-    fullName: "Erick Santos",
-    phone: "951763504",
-    email: "esantos@gmail.com",
-    comments: "Testing"
+    fullName: "",
+    phone: "",
+    email: "",
+    comments: ""
   }
 
   return (

@@ -1,25 +1,31 @@
-import { useState } from 'react'
-import { Formik, Form } from 'formik'
-import { Spinner, MainButton, TextField } from '@/components'
-import { ContactFormSchema } from '@/schema'
+import { useEffect, useRef, useState } from "react";
+import { Formik, Form } from "formik";
+import { MainButton, Notification, Spinner, TextField } from "@/components";
+import { ContactFormSchema } from "@/schema";
+import autoAnimate from "@formkit/auto-animate";
 
 interface FormData {
-  fullName: string
-  phone: string
-  email: string
-  comments: string
+  fullName: string;
+  phone: string;
+  email: string;
+  comments: string;
 }
 
 export const ContactForm = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const parent = useRef(null);
 
-  const [ submitted, setSubmitted ] = useState( false )
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current);
+  }, [parent]);
 
   const initialValues: FormData = {
-    fullName: "",
-    phone: "",
-    email: "",
-    comments: ""
-  }
+    fullName: "Erick Santos",
+    phone: "951763504",
+    email: "esantostaype@gmail.com",
+    comments: "Testing comment",
+  };
 
   return (
     <Formik
@@ -27,83 +33,102 @@ export const ContactForm = () => {
       validationSchema={ContactFormSchema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
-          const response = await fetch('/api/send-email', {
-            method: 'POST',
+          const response = await fetch("http://localhost:3000/api/contact-us", {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({ data: values }),
+            body: JSON.stringify(values),
+            mode: "cors",
+            credentials: "same-origin",
           });
 
           if (!response.ok) {
-            throw new Error('Failed to send email');
+            setError(true);
+            setTimeout(() => setError(false), 5000);
+            throw new Error("Failed to send email");
           }
-
           setSubmitted(true);
           resetForm();
           setTimeout(() => setSubmitted(false), 5000);
         } catch (error) {
-          console.error('Error sending email:', error);
+          setError(true);
+          setTimeout(() => setError(false), 5000);
+          console.error("Error sending email:", error);
         } finally {
           setSubmitting(false);
         }
       }}
     >
-      {({ errors, touched, values, isSubmitting, handleChange, setFieldValue }) => (
+      {({ errors, touched, values, isSubmitting }) => (
         <Form>
-          <Spinner isActive={ isSubmitting } />
-          { submitted && "Sent" }
-          <div className='flex flex-col lg:flex-row flex-wrap gap-6'>
-            <div className='flex-[0_0_100%]'>
-            <TextField
-              label="Nombre Completo"
-              type="text"
-              name="fullName"
-              placeholder="Ingresa tu Nombre Completo"
-              errors={ errors.fullName }
-              touched={ touched.fullName }
-              value={ values.fullName }
-            />
+          <Spinner isActive={isSubmitting} />
+          <div
+            className="flex flex-col lg:flex-row flex-wrap gap-6"
+            ref={parent}
+          >
+            {submitted && (
+              <Notification
+                type="success"
+                message="Thank you for getting in touch with us! We will contact you soon to provide the information you need."
+              />
+            )}
+            {error && (
+              <Notification
+                type="error"
+                message="Failed to send email. Try again later."
+              />
+            )}
+            <div className="flex-[0_0_100%]">
+              <TextField
+                label="Full Name"
+                type="text"
+                name="fullName"
+                placeholder="Enter your Full Name"
+                errors={errors.fullName}
+                touched={touched.fullName}
+                value={values.fullName}
+              />
             </div>
-            <div className='flex-1'>
-            <TextField
-              label="Teléfono"
-              type="tel"
-              name="phone"
-              placeholder="Ingresa tu Teléfono"
-              errors={ errors.phone }
-              touched={ touched.phone }
-              value={ values.phone }
-            />
-            </div>
-            <div className='flex-1'>
+            <div className="flex-1">
               <TextField
                 label="Email"
                 type="email"
                 name="email"
-                placeholder="Ingresa tu Email"
-                errors={ errors.email }
-                touched={ touched.email }
-                value={ values.email }
+                placeholder="Enter your Email"
+                errors={errors.email}
+                touched={touched.email}
+                value={values.email}
               />
             </div>
-            <div className='flex-[0_0_100%]'>
+            <div className="flex-1">
+              <TextField
+                label="Phone"
+                type="tel"
+                name="phone"
+                placeholder="Enter your Phone Number"
+                errors={errors.phone}
+                touched={touched.phone}
+                value={values.phone}
+              />
+            </div>
+            <div className="flex-[0_0_100%]">
               <TextField
                 typeField="textarea"
-                label="Comentarios"
+                label="Comments"
                 name="comments"
-                placeholder="Ingresa tus Comentarios"
-                errors={ errors.comments }
-                touched={ touched.comments }
-                value={ values.comments }
+                placeholder="Enter your Comments"
+                errors={errors.comments}
+                touched={touched.comments}
+                value={values.comments}
               />
             </div>
-            <div className='flex-[0_0_100%] flex justify-end'>                
+            <div className="flex-[0_0_100%] flex justify-end">
               <MainButton>Send Message</MainButton>
             </div>
           </div>
         </Form>
       )}
     </Formik>
-  )
-}
+  );
+};

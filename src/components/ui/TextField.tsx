@@ -1,8 +1,7 @@
-'use client'
-
-import { useState, type FC, type ChangeEvent, useEffect } from 'react'
+import { useState, type FC, type ChangeEvent, useEffect, useRef } from 'react'
 import { ErrorMessage, Field } from 'formik'
 import clsx from 'clsx'
+import autoAnimate from '@formkit/auto-animate'
 
 export interface Props {
   label?: string
@@ -36,6 +35,11 @@ export const TextField: FC<Props> = ({
 }) => {
   const [isActive, setIsActive] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
+  const parent = useRef(null)
+
+  useEffect(() => {
+    parent.current && autoAnimate( parent.current )
+  }, [ parent ])
 
   useEffect(() => {
     setIsFilled(!!value)
@@ -58,9 +62,9 @@ export const TextField: FC<Props> = ({
       'text-xs top-0': isFloating,
       'top-[26px]': !isFloating,
       'text-gray-400': !hasError && !isActive,
-      'text-green-500': isActive && !hasError,
+      'text-dyn-green-500': isActive && !hasError,
       'text-red-500': hasError,
-      'group-hover:text-green-500': !hasError && !isActive,
+      'group-hover:text-dyn-green-500': !hasError && !isActive,
     }
   )
 
@@ -69,7 +73,6 @@ export const TextField: FC<Props> = ({
     {
       'h-32 pt-[20px]': typeField === "textarea",
       'h-16 pt-[6px]': typeField !== "textarea",
-      // Solo mostramos el placeholder cuando el label está arriba o cuando no hay label
       'placeholder:opacity-100': isFloating || !label,
       'placeholder:opacity-0': !isFloating && label,
       'placeholder:text-gray-400': true,
@@ -82,9 +85,9 @@ export const TextField: FC<Props> = ({
       'h-32': typeField === "textarea",
       'h-16': typeField !== "textarea",
       'border-[rgba(255,255,255,0.12)]': !isActive && !hasError,
-      'border-green-500': isActive && !hasError,
+      'border-dyn-green-500': isActive && !hasError,
       'border-red-500': hasError,
-      'group-hover:border-green-500': !hasError && !isActive,
+      'group-hover:border-dyn-green-500': !hasError && !isActive,
     }
   )
 
@@ -105,6 +108,7 @@ export const TextField: FC<Props> = ({
       onFocus={handleFieldFocus}
       onBlur={handleFieldBlur}
       onChange={handleFieldChange}
+      ref={ parent }
     >
       <label htmlFor={name} className={labelClasses}>
         {label}

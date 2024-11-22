@@ -21,10 +21,10 @@ export const ContactForm = () => {
   }, [parent]);
 
   const initialValues: FormData = {
-    fullName: "Erick Santos",
-    phone: "951763504",
-    email: "esantostaype@gmail.com",
-    comments: "Testing comment",
+    fullName: "",
+    phone: "",
+    email: "",
+    comments: "",
   };
 
   return (

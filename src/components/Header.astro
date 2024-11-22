@@ -37,7 +37,7 @@ const nav: Nav[] = [
   import LocomotiveScroll from 'locomotive-scroll'
 
   document.addEventListener("astro:page-load", () => {
-    const header = document.querySelector("header") as HTMLElement;
+    const header = document.querySelector("header") as HTMLElement
     const scroll = new LocomotiveScroll({
       el: document.querySelector("[data-scroll-container]") as HTMLElement,
       smooth: true
@@ -45,9 +45,9 @@ const nav: Nav[] = [
 
     scroll.on("scroll", ({ scroll }) => {
       if (scroll.y >= 50) {
-        header.classList.add("onScroll");
+        header.classList.add("onScroll")
       } else {
-        header.classList.remove("onScroll");
+        header.classList.remove("onScroll")
       }
     })
   })

@@ -1,0 +1,10 @@
+---
+interface Props {
+	path?: string
+}
+const { path= "#" } = Astro.props
+---
+
+<a href={ path } target="_blank" class="dyn-gradient-static transition-all duration-300 text-black h-8 w-8 flex items-center justify-center rounded-lg hover:scale-110">
+  <slot/>
+</a>

@@ -139,6 +139,10 @@ p:last-child{
   -webkit-text-fill-color: transparent;
 }
 
+.dyn-gradient-static{
+  background: linear-gradient(90deg, var(--c1, var(--dyn-green-400)), var(--c2, var(--dyn-cyan-400)) 51%, var(--c1, var(--dyn-green-400))) var(--x, 0)/ 200%;
+}
+
 .dyn-gradient{
   background: linear-gradient(90deg, var(--c1, var(--dyn-green-400)), var(--c2, var(--dyn-cyan-400)) 51%, var(--c1, var(--dyn-green-400))) var(--x, 0)/ 200%;
   transition: all 0.3s ease-in-out;

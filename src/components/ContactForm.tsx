@@ -1,31 +1,31 @@
-import { useEffect, useRef, useState } from "react";
-import { Formik, Form } from "formik";
-import { MainButton, Notification, Spinner, TextField } from "@/components";
-import { ContactFormSchema } from "@/schema";
-import autoAnimate from "@formkit/auto-animate";
+import { useEffect, useRef, useState } from "react"
+import { Formik, Form } from "formik"
+import { MainButton, Notification, Spinner, TextField } from "@/components"
+import { ContactFormSchema } from "@/schema"
+import autoAnimate from "@formkit/auto-animate"
 
 interface FormData {
-  fullName: string;
-  phone: string;
-  email: string;
-  comments: string;
+  fullName: string
+  phone: string
+  email: string
+  comments: string
 }
 
 export const ContactForm = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
-  const parent = useRef(null);
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
+  const parent = useRef(null)
 
   useEffect(() => {
-    parent.current && autoAnimate(parent.current);
-  }, [parent]);
+    parent.current && autoAnimate(parent.current)
+  }, [parent])
 
   const initialValues: FormData = {
     fullName: "",
     phone: "",
     email: "",
-    comments: "",
-  };
+    comments: ""
+  }
 
   return (
     <Formik
@@ -33,7 +33,7 @@ export const ContactForm = () => {
       validationSchema={ContactFormSchema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
-          const response = await fetch("http://localhost:3000/api/contact-us", {
+          const response = await fetch(`${ import.meta.env.PUBLIC_API_URL }/contact-us`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -41,22 +41,22 @@ export const ContactForm = () => {
             body: JSON.stringify(values),
             mode: "cors",
             credentials: "same-origin",
-          });
+          })
 
           if (!response.ok) {
-            setError(true);
-            setTimeout(() => setError(false), 5000);
-            throw new Error("Failed to send email");
+            setError(true)
+            setTimeout(() => setError(false), 5000)
+            throw new Error("Failed to send email")
           }
-          setSubmitted(true);
-          resetForm();
-          setTimeout(() => setSubmitted(false), 5000);
+          setSubmitted(true)
+          resetForm()
+          setTimeout(() => setSubmitted(false), 5000)
         } catch (error) {
-          setError(true);
-          setTimeout(() => setError(false), 5000);
-          console.error("Error sending email:", error);
+          setError(true)
+          setTimeout(() => setError(false), 5000)
+          console.error("Error sending email:", error)
         } finally {
-          setSubmitting(false);
+          setSubmitting(false)
         }
       }}
     >
@@ -130,5 +130,5 @@ export const ContactForm = () => {
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}

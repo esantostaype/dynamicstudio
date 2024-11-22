@@ -1,0 +1,71 @@
+---
+import Container from "@/components/Container.astro"
+import FooterAddressItem from "@/components/FooterAddressItem.astro"
+import FooterColumn from "@/components/FooterColumn.astro"
+import SocialIcon from "@/components/SocialIcon.astro"
+import { Email, Facebook, Instagram, Location, Phone, Tiktok, X } from "./Icons"
+
+---
+
+<footer class="mt-8 md:mt-12 xl:mt-20 content text-gray-400 text-sm">
+  <Container className="py-8 md:py-16 flex flex-col lg:flex-row gap-8 justify-between">
+    <div class="lg:max-w-72">
+      <div class="mb-2">
+        <a href="/"><img src="/images/logo.svg" width="220" height="32" alt="Dynamic Studio"></a>
+      </div>
+      <p>Dynamic Studio specializes in customized staffing solutions and consulting for all size businesses.</p>
+    </div>
+    <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+      <FooterColumn title="Connect with Us">
+        <div class="flex gap-2">
+          <SocialIcon><Facebook width="16"/></SocialIcon>
+          <SocialIcon><X width="16"/></X>
+          <SocialIcon><Instagram width="16"/></SocialIcon>
+          <SocialIcon><Tiktok width="16"/></SocialIcon>
+        </div>
+      </FooterColumn>
+      <FooterColumn title="Contact Us">
+        <div class="flex flex-col gap-4">
+          <FooterAddressItem>
+            <Location width="18" slot="icon"/>
+            <p slot="content"><strong class="text-white font-semibold">Dynamic Studio</strong><br>
+              4025 E. La Palma Ave, Suite 204<br>
+              Anaheim, CA 92807</p>
+          </FooterAddressItem>
+          <FooterAddressItem>
+            <Email width="18" slot="icon"/>
+            <p slot="content">contact@dynamicstudio.us</p>
+          </FooterAddressItem>
+          <FooterAddressItem>
+            <Phone width="18" slot="icon"/>
+            <p slot="content">(899) 544-5556</p>
+          </FooterAddressItem>
+        </div>
+      </FooterColumn>
+    </div>
+  </Container>
+  <section class="border-t border-t-[rgba(255,255,255,0.1)] py-6 md:py-8">
+    <Container className="flex flex-col md:flex-row justify-between gap-2">
+      <div>Copyright © 2024 Dynamic Studio</div>
+      <div class="flex gap-4 footer-links">
+        <a href="#">Terms of Use</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </Container>
+  </section>
+</footer>
+
+<style>
+  .content{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.04) 100%);
+  }
+  .footer-links a{
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .footer-links a:hover{
+    color: white;
+    text-decoration: none;
+  }
+</style>

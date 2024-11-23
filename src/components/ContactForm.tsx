@@ -33,39 +33,39 @@ export const ContactForm = () => {
       validationSchema={ContactFormSchema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
-          setError(false);
-          const response = await fetch('http://localhost:3000/api/contact-us', {
+          setError(false)
+          const response = await fetch(`${ import.meta.env.PUBLIC_API_URL }`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
             },
             body: JSON.stringify(values),
-            mode: 'cors', // Importante para CORS
-            credentials: 'same-origin' // o 'include' si necesitas enviar cookies
-          });
+            mode: 'cors',
+            credentials: 'same-origin'
+          })
 
-          let data;
+          let data
           try {
-            data = await response.json();
+            data = await response.json()
           } catch (e) {
-            console.error('Error parsing response:', e);
-            throw new Error('Invalid server response');
+            console.error('Error parsing response:', e)
+            throw new Error('Invalid server response')
           }
 
           if (!response.ok) {
-            throw new Error(data.error || 'Failed to send email');
+            throw new Error(data.error || 'Failed to send email')
           }
 
-          setSubmitted(true);
-          resetForm();
-          setTimeout(() => setSubmitted(false), 5000);
+          setSubmitted(true)
+          resetForm()
+          setTimeout(() => setSubmitted(false), 5000)
         } catch (error) {
-          console.error('Error sending email:', error);
-          setError(true);
-          setTimeout(() => setError(false), 5000);
+          console.error('Error sending email:', error)
+          setError(true)
+          setTimeout(() => setError(false), 5000)
         } finally {
-          setSubmitting(false);
+          setSubmitting(false)
         }
       }}
     >

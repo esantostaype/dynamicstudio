@@ -4,7 +4,7 @@ import FooterAddressItem from "@/components/FooterAddressItem.astro"
 import FooterColumn from "@/components/FooterColumn.astro"
 import SocialIcon from "@/components/SocialIcon.astro"
 import { Email, Facebook, Instagram, Location, Phone, Tiktok, X } from "./Icons"
-
+const currentYear = new Date().getFullYear()
 ---
 
 <footer class="mt-8 md:mt-12 xl:mt-20 content text-gray-400 text-sm">
@@ -47,7 +47,7 @@ import { Email, Facebook, Instagram, Location, Phone, Tiktok, X } from "./Icons"
   </Container>
   <section class="border-t border-t-[rgba(255,255,255,0.1)] py-6 md:py-8">
     <Container className="flex flex-col md:flex-row justify-between gap-2">
-      <div>Copyright © 2024 Dynamic Studio</div>
+      <div>Copyright © { currentYear } Dynamic Business Lab LLC</div>
       <div class="flex gap-4 footer-links">
         <a href="#">Terms of Use</a>
         <a href="#">Privacy Policy</a>

@@ -38,9 +38,7 @@ export const ContactForm = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(values),
-            mode: "cors",
-            credentials: "same-origin",
+            body: JSON.stringify(values)
           })
 
           if (!response.ok) {

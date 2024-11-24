@@ -1,0 +1,63 @@
+---
+const items = [
+    {
+      title: "Flexiable Price"
+    },
+    {
+      title: "Tailored Web Solutions"
+    },
+    {
+      title: "Scalable E-Commerce Platforms"
+    },
+    {
+      title: "Custom Software Development"
+    },
+    {
+      title: "Innovative Branding Strategies"
+    }
+  ]
+
+---
+
+<section class='text-[4rem] md:text-[6rem] xl:text-[8rem] my-32 md:my-48 flex marquee'>
+  <ul class="flex gap-8 md:gap-12 xl:gap-16">
+    { items.map(( item ) => (
+      <li class="pl-8 md:pl-12 xl:pl-16 relative text-nowrap leading-tight">
+        <h2 class="bg-gradient-to-r to-[#111] from-[#666] bg-clip-text text-fill-transparent font-normal">
+          <span class="size-2 md:size-3 bg-[rgba(255,255,255,0.5)] absolute rounded-md left-0 top-1/2"></span>
+          { item.title }
+        </h2>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    function Marquee(selector: string, speed: number): void {
+      const parentSelector = document.querySelector(selector)
+      if (!parentSelector) {
+        console.error(`Selector "${selector}" not found.`)
+        return
+      }
+      const clone = parentSelector.innerHTML
+      const firstElement = parentSelector.children[0] as HTMLElement
+      let i = 0
+      
+      parentSelector.insertAdjacentHTML('beforeend', clone)
+      parentSelector.insertAdjacentHTML('beforeend', clone)
+
+      setInterval(function () {
+        firstElement.style.marginLeft = `-${i}px`
+        if (i > firstElement.clientWidth) {
+          i = 0
+        }
+        i = i + speed
+      }, 0)
+    }
+    Marquee('.marquee', 0.4)
+  })
+</script>
+
+<style>
+</style>

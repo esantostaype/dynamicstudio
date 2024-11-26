@@ -42,6 +42,16 @@ const services: Service[] = [
   <SectionTitle className='max-w-xl reveal-fade z-50' title='Unlock Revenue Growth for Your Business' subtitle='What we offer' />
 </Container>
 <ContainerFluid>
+  <!-- <ul class="flex flex-wrap gap-4 xl:gap-6">
+    { services.map(( service, index ) => (
+      <li class="flex-[0_0_calc(50%-8px)] lg:flex-[0_0_calc(25%-12px)] xl:flex-[0_0_calc(25%-18px)] group reveal-fade">
+        <a href={`/services/${ service.slug }`} class="aspect-square flex items-center p-4 md:p-6 xl:p-8 overflow-hidden relative rounded md:rounded-lg" data-scroll data-scroll-speed={`-${ index }.4`}>
+          <h2 class="font-medium relative z-20 text-lg sm:text-xl md:text-2xl lg:text-3xl leading-tight group-hover:text-dyn-green-400 transition-all duration-300">{ service.title }</h2>
+          <img width="410" height="302" alt={`Dynamic Studio ${ service.title }`} src={ service.image } alt={ service.title } class="absolute h-full w-full top-0 left-0 z-10 object-cover opacity-40 group-hover:scale-125 group-hover:opacity-20 group-hover:rotate-12 transition-all duration-500" />
+        </a>
+      </li>
+    ))}
+  </ul> -->
   <ul class="flex flex-wrap gap-4 md:gap-6 xl:gap-8">
     { services.map(( service, index ) => {
       const renderIcon = (icon: string) => {
@@ -71,7 +81,7 @@ const services: Service[] = [
                     { renderIcon( service.icon )}
                   </div>
                 </div>
-                <div class="mt-12 mb-8">
+                <div class="mt-12 mb-8 text-gray-400">
                   { service.description }
                 </div>
               </div>

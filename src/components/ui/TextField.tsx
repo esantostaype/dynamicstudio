@@ -1,7 +1,6 @@
-import { useState, type FC, type ChangeEvent, useEffect, useRef } from 'react'
+import { useState, type FC, type ChangeEvent, useEffect } from 'react'
 import { ErrorMessage, Field } from 'formik'
 import clsx from 'clsx'
-import autoAnimate from '@formkit/auto-animate'
 
 export interface Props {
   label?: string
@@ -35,11 +34,6 @@ export const TextField: FC<Props> = ({
 }) => {
   const [isActive, setIsActive] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
-  const parent = useRef(null)
-
-  useEffect(() => {
-    parent.current && autoAnimate( parent.current )
-  }, [ parent ])
 
   useEffect(() => {
     setIsFilled(!!value)
@@ -108,7 +102,6 @@ export const TextField: FC<Props> = ({
       onFocus={handleFieldFocus}
       onBlur={handleFieldBlur}
       onChange={handleFieldChange}
-      ref={ parent }
     >
       <label htmlFor={name} className={labelClasses}>
         {label}

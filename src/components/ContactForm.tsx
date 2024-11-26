@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { Formik, Form } from "formik"
 import { MainButton, Notification, Spinner, TextField } from "@/components"
 import { ContactFormSchema } from "@/schema"
-import autoAnimate from "@formkit/auto-animate"
 
 interface FormData {
   fullName: string
@@ -14,11 +13,6 @@ interface FormData {
 export const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(false)
-  const parent = useRef(null)
-
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current)
-  }, [parent])
 
   const initialValues: FormData = {
     fullName: "",
@@ -72,10 +66,7 @@ export const ContactForm = () => {
       {({ errors, touched, values, isSubmitting }) => (
         <Form>
           <Spinner isActive={isSubmitting} />
-          <div
-            className="flex flex-col lg:flex-row flex-wrap gap-6"
-            ref={parent}
-          >
+          <div className="flex flex-col lg:flex-row flex-wrap gap-6">
             {submitted && (
               <Notification
                 type="success"

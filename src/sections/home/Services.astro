@@ -1,28 +1,38 @@
 ---
 import Container from '@/components/Container.astro'
+import ContainerFluid from '@/components/ContainerFluid.astro'
 import SectionTitle from '@/components/SectionTitle.astro'
 import type { Service } from '@/interfaces'
+import { Websites, ECommerce, Software, Branding } from '@/components/Icons'
 
 const services: Service[] = [
   {
     title: "Websites",
     slug: "websites",
-    image: "/images/services/websites.webp"
+    image: "/images/services/websites.webp",
+    icon: "websites",
+    description: "We design and develop modern, responsive websites that enhance user engagement and showcase your brand’s identity effectively."
   },
   {
     title: "E-Commerce",
     slug: "e-commerce",
-    image: "/images/services/e-commerce.webp"
+    image: "/images/services/e-commerce.webp",
+    icon: "e-commerce",
+    description: "Our e-commerce solutions are tailored to help you sell online with secure, scalable, and user-friendly platforms."
   },
   {
     title: "Custom software",
     slug: "custom-software",
-    image: "/images/services/custom-software.webp"
-  },  
+    image: "/images/services/custom-software.webp",
+    icon: "custom-software",
+    description: "We create bespoke software applications that solve complex challenges and streamline your business operations."
+  },
   {
     title: "Branding",
     slug: "branding",
-    image: "/images/services/branding.webp"
+    image: "/images/services/branding.webp",
+    icon: "branding",
+    description: "Our branding services include logo design, brand strategy, and storytelling to help your business stand out and connect with your audience."
   }
 ]
 
@@ -30,14 +40,48 @@ const services: Service[] = [
 
 <Container>
   <SectionTitle className='max-w-xl reveal-fade z-50' title='Unlock Revenue Growth for Your Business' subtitle='What we offer' />
-  <ul class="flex flex-wrap gap-4 xl:gap-6">
-    { services.map(( service, index ) => (
-      <li class="flex-[0_0_calc(50%-8px)] lg:flex-[0_0_calc(25%-12px)] xl:flex-[0_0_calc(25%-18px)] group reveal-fade">
-        <a href={`/services/${ service.slug }`} class="aspect-square flex items-center p-4 md:p-6 xl:p-8 overflow-hidden relative rounded md:rounded-lg" data-scroll data-scroll-speed={`-${ index }.4`}>
-          <h2 class="font-medium relative z-20 text-lg sm:text-xl md:text-2xl lg:text-3xl leading-tight group-hover:text-dyn-green-400 transition-all duration-300">{ service.title }</h2>
-          <img width="410" height="302" alt={`Dynamic Studio ${ service.title }`} src={ service.image } alt={ service.title } class="absolute h-full w-full top-0 left-0 z-10 object-cover opacity-40 group-hover:scale-125 group-hover:opacity-20 group-hover:rotate-12 transition-all duration-500" />
-        </a>
-      </li>
-    ))}
-  </ul>
 </Container>
+<ContainerFluid>
+  <ul class="flex flex-wrap gap-4 md:gap-6 xl:gap-8">
+    { services.map(( service, index ) => {
+      const renderIcon = (icon: string) => {
+        switch (icon) {
+          case 'websites':
+            return <Websites width='20' />
+          case 'e-commerce':
+            return <ECommerce width='20' />
+          case 'custom-software':
+            return <Software width='20' />
+          case 'branding':
+            return <Branding width='20' />
+          default:
+            return null
+        }
+      }
+      return (
+        <li class="flex-[0_0_calc(100%)] md:flex-[0_0_calc(50%-12px)]  lg:flex-[0_0_calc(50%-16px)] xl:flex-[0_0_calc(25%-24px)] group reveal-fade">
+          <a href={`/services/${ service.slug }`} data-scroll data-scroll-speed={`-${ index }.4`} class="block">
+            <div class="border border-[rgba(255,255,255,0.16)] group-hover:border-transparent group-hover:bg-[rgba(255,255,255,0.06)] transition-all duration-500 block p-2 md:p-4 overflow-hidden relative rounded md:rounded-lg">
+              <div class="p-4">
+                <div class="flex justify-between items-center">
+                  <h2 class="font-medium relative z-20 text-lg md:text-xl lg:text-2xl leading-tight group-hover:text-dyn-green-400 transition-all duration-500">
+                    { service.title }
+                  </h2>
+                  <div class="size-12 rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.16)] group-hover:text-dyn-green-500 group-hover:border-dyn-green-500 transition-all duration-500">
+                    { renderIcon( service.icon )}
+                  </div>
+                </div>
+                <div class="mt-12 mb-8">
+                  { service.description }
+                </div>
+              </div>
+              <div class="overflow-hidden rounded">
+                <img width="410" height="302" alt={`Dynamic Studio ${ service.title }`} src={ service.image } alt={ service.title } class="w-full aspect-video object-cover group-hover:scale-110 transition-all duration-500" />
+              </div>
+            </div>
+          </a>
+        </li>
+      )
+    })}
+  </ul>
+</ContainerFluid>

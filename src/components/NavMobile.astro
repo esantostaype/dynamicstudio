@@ -29,8 +29,12 @@ const { nav } = Astro.props
       <Close width='12'/>
     </button>
     <nav class="flex flex-col pt-7 gap-2 relative z-10">
-      { nav.map(({ label, path, active }) => (
-        <a class={`hover:text-dyn-green-400 py-1 px-8 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} href={ path }>
+      { nav.map(({ label, path, active, isScrollLink }) => (
+        <a 
+          class={`hover:text-dyn-green-400 py-1 px-8 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} 
+          href={ path }
+          data-scroll-to={ isScrollLink ? path.replace('#', '') : null }
+        >
           { label }
         </a>
         ))
@@ -49,20 +53,40 @@ const { nav } = Astro.props
     const closeNavBg = document.querySelector(".close-nav-bg") as HTMLElement
     const navMobile = document.querySelector(".nav-mobile") as HTMLElement
     const htmlElement = document.documentElement
+    const navLinks = document.querySelectorAll('a[data-scroll-to]')
+
+    // Function to close mobile nav
+    const closeNavMobile = () => {
+      navMobile.classList.remove("active")
+      htmlElement.classList.remove("open-nav")
+    }
 
     openNavButton.addEventListener('click',()=>{
       navMobile.classList.add("active")
       htmlElement.classList.add("open-nav")
     })
 
-    closeNavButton.addEventListener('click',()=>{
-      navMobile.classList.remove("active")
-      htmlElement.classList.remove("open-nav")
-    })
+    closeNavButton.addEventListener('click', closeNavMobile)
 
-    closeNavBg.addEventListener('click',()=>{
-      navMobile.classList.remove("active")
-      htmlElement.classList.remove("open-nav")
+    closeNavBg.addEventListener('click', closeNavMobile)
+
+    // Add click event listener for scroll links
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = link.getAttribute('data-scroll-to')
+        const scroll = (window as any).locomotiveScroll
+
+        if (target) {
+          e.preventDefault()
+          const contactSection = document.getElementById(target)
+          if (contactSection && scroll) {
+            scroll.scrollTo(contactSection)
+          }
+          
+          // Close mobile nav after clicking
+          closeNavMobile()
+        }
+      })
     })
   })
 </script>

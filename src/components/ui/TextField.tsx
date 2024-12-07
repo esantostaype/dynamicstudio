@@ -151,7 +151,7 @@ export const TextField: FC<Props> = ({
       <ErrorMessage 
         name={name} 
         component="span" 
-        className="text-sm text-red-500 mt-1 block text-left" 
+        className="text-xs text-red-500 mt-1 block text-left absolute" 
       />
     </div>
   )

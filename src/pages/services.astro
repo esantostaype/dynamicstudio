@@ -1,11 +1,26 @@
 ---
 import Main from "@/layouts/Main.astro"
-import Interior from "@/layouts/Interior.astro"
+import Container from "@/components/Container.astro"
+import { MainButton } from "@/components"
+import ServicesList from '@/sections/home/Services.astro'
+import Marquee from "@/sections/Marquee.astro"
 
 ---
 
 <Main>
-	<Interior>
-		<h1 class="text-7xl">Services</h1>
-	</Interior>
+	<Container className="pt-24 md:pt-[124px] pb-20">
+		<section class="flex flex-col md:flex-row items-center gap-6 md:gap-12">
+			<div class="flex-1 relative z-20">
+				<h2 class="text-3xl lg:text-4xl xl:text-5xl font-light mb-4">Our Services</h2>
+				<h1 class="text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-medium 2xl:w-[140%]">Unlock Revenue Growth for Your Business</h1>
+				<h3 class="text-lg my-6">At Dynamic Studio, we empower your business to reach its full potential with tailored solutions designed to drive growth and deliver results.</h3>
+				<MainButton client:only>Get a Quote Now</MainButton>
+			</div>
+			<div class="flex-1 relative z-10">
+				<img src="/images/services.webp" data-scroll data-scroll-speed="2" class="rounded-2xl" alt="Our Services">
+			</div>
+		</section>
+	</Container>
+	<ServicesList/>
+	<Marquee/>
 </Main>

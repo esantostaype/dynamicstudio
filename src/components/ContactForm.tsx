@@ -66,7 +66,7 @@ export const ContactForm = () => {
       {({ errors, touched, values, isSubmitting }) => (
         <Form>
           <Spinner isActive={isSubmitting} />
-          <div className="flex flex-col lg:flex-row flex-wrap gap-6">
+          <div className="flex flex-col lg:flex-row flex-wrap gap-8">
             {submitted && (
               <Notification
                 type="success"

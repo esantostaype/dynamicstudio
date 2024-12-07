@@ -11,18 +11,22 @@ const nav: Nav[] = [
   { label: "Services", path: "/services", active: normalizedPathName.startsWith("/services") },
   { label: "Projects", path: "/projects", active: normalizedPathName.startsWith("/projects") },
   { label: "About Us", path: "/about-us" },
-  { label: "Contact Us", path: "/contact-us" }
+  { label: "Contact Us", path: "#contact", isScrollLink: true } // Modified to be a scroll link
 ].map((item) => ({
 	...item,
 	active: item.active ?? normalizedPathName === item.path
 }))
----
+--- 
 
 <header class="flex fixed items-center justify-between left-0 px-5 py-4 xl:py-0 top-0 w-full z-[99999] transition-all duration-1000 border-b-transparent">
   <a href="/"><img src="/images/logo.svg" width="220" height="32" alt="Dynamic Studio"></a>
   <nav class="xl:flex gap-4 hidden uppercase text-sm font-normal tracking-wide">
-    { nav.map(({ label, path, active }) => (
-      <a class={`hover:text-dyn-green-400 py-8 px-4 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} href={ path }>
+    { nav.map(({ label, path, active, isScrollLink }) => (
+      <a 
+        class={`hover:text-dyn-green-400 py-8 px-4 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} 
+        href={ path }
+        data-scroll-to={ isScrollLink ? path.replace('#', '') : null }
+      >
         { label }
         { active && <span class="absolute left-0 top-0 w-full h-[2px] bg-dyn-green-400" transition:name="active"></span> }
       </a>
@@ -43,6 +47,7 @@ const nav: Nav[] = [
       smooth: true
     })
 
+    // Scroll event handling remains the same
     scroll.on("scroll", ({ scroll }) => {
       if (scroll.y >= 50) {
         header.classList.add("onScroll")
@@ -50,8 +55,21 @@ const nav: Nav[] = [
         header.classList.remove("onScroll")
       }
     })
-  })
 
+    // Add click event listener for scroll links
+    document.querySelectorAll('a[data-scroll-to]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = link.getAttribute('data-scroll-to')
+        if (target) {
+          e.preventDefault()
+          const contactSection = document.getElementById(target)
+          if (contactSection) {
+            scroll.scrollTo(contactSection)
+          }
+        }
+      })
+    })
+  })
 </script>
 
 <style>

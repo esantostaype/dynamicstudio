@@ -32,10 +32,12 @@ const { title, description, image } = Astro.props
 
 <script>
 	import LocomotiveScroll from 'locomotive-scroll'
-	import { RevealFade, RevealUp } from '@/js/reveal'
+	import { RevealFade, RevealLeft, RevealUp } from '@/js/reveal'
 	document.addEventListener("astro:page-load", () => {
 		const revealUp = new RevealUp();
     revealUp.observe()
+		const revealLeft = new RevealLeft()
+    revealLeft.observe()
 		const revealFade = new RevealFade()
     revealFade.observe()
 		new LocomotiveScroll({

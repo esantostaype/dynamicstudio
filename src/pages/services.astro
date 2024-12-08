@@ -8,19 +8,39 @@ import Marquee from "@/sections/Marquee.astro"
 ---
 
 <Main>
-	<Container className="pt-24 md:pt-[124px] pb-20">
+	<Container className="pt-24 md:pt-[124px] pb-12 lg:pb-24 xl:pb-44">
 		<section class="flex flex-col md:flex-row items-center gap-6 md:gap-12">
 			<div class="flex-1 relative z-20">
-				<h2 class="text-3xl lg:text-4xl xl:text-5xl font-light mb-4">Our Services</h2>
-				<h1 class="text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-medium 2xl:w-[140%]">Unlock Revenue Growth for Your Business</h1>
-				<h3 class="text-lg my-6">At Dynamic Studio, we empower your business to reach its full potential with tailored solutions designed to drive growth and deliver results.</h3>
-				<MainButton client:only>Get a Quote Now</MainButton>
+				<h2 class="reveal-left text-3xl lg:text-4xl xl:text-5xl font-light mb-4">Our Services</h2>
+				<h1 class="reveal-left text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-medium 2xl:w-[140%]">Unlock Revenue Growth for Your Business</h1>
+				<h3 class="reveal-left text-lg my-6">At Dynamic Studio, we empower your business to reach its full potential with tailored solutions designed to drive growth and deliver results.</h3>
+				<div class="button reveal-left">
+					<MainButton client:only>Get a Quote Now</MainButton>
+				</div>
 			</div>
-			<div class="flex-1 relative z-10">
-				<img src="/images/services.webp" data-scroll data-scroll-speed="2" class="rounded-2xl" alt="Our Services">
+			<div class="flex-1 relative z-10 reveal-up">
+				<img src="/images/services.webp" data-scroll data-scroll-speed="2" class="rounded-2xl aspect-[4/3] object-cover" alt="Our Services">
 			</div>
 		</section>
 	</Container>
 	<ServicesList/>
 	<Marquee/>
 </Main>
+
+<style>
+	h2.reveal-left {
+		transition-delay: 0ms;
+	}
+
+	h1.reveal-left {
+		transition-delay: 40ms;
+	}
+
+	h3.reveal-left {
+		transition-delay: 80ms;
+	}
+
+	.button {
+		transition-delay: 120ms;
+	}
+</style>

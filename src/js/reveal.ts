@@ -103,3 +103,56 @@ export class RevealUp {
     }
   }
 }
+
+export class RevealLeft {
+  private rafId: number | null = null;
+  private readonly delay: number = 80;
+  private lastTime: number = 0;
+  private readonly observer: IntersectionObserver;
+  
+  constructor() {
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            if (!element.classList.contains('reveal-left__visible')) {
+              element.classList.add('reveal-left__pending');
+              if (!this.rafId) {
+                this.rafId = requestAnimationFrame(() => this.reveal());
+              }
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '1px'
+      }
+    );
+  }
+
+  public observe(): void {
+    document.querySelectorAll('.reveal-left').forEach((element) => {
+      this.observer.observe(element);
+    });
+  }
+
+  private reveal(): void {
+    this.rafId = null;
+    const now = performance.now();
+
+    if (now - this.lastTime > this.delay) {
+      this.lastTime = now;
+      const pendingElements = document.querySelectorAll('.reveal-left__pending');
+      if (pendingElements.length > 0) {
+        pendingElements[0].classList.remove('reveal-left__pending');
+        pendingElements[0].classList.add('reveal-left__visible');
+      }
+    }
+
+    if (document.querySelectorAll('.reveal-left__pending').length >= 1) {
+      this.rafId = requestAnimationFrame(() => this.reveal());
+    }
+  }
+}

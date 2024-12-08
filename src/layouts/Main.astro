@@ -14,7 +14,7 @@ const { title, description, image } = Astro.props
 
 <!doctype html>
 <html lang="en">
-	<Head title={ title } description={ description } image={ image } />
+	<Head title=`${ title } | Dynamic Studio` description={ description } image={ image } />
 	<body data-scroll-container>
 		<Header/>
 		<main data-scroll-section class="mix-blend-screen overflow-x-hidden">

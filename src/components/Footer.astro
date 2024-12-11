@@ -8,7 +8,7 @@ import Contact from '@/sections/Contact.astro'
 const currentYear = new Date().getFullYear()
 ---
 <Contact/>
-<footer class="mt-8 md:mt-12 xl:mt-20 content text-gray-400 text-sm">
+<footer class="mt-8 md:mt-12 xl:mt-20 surface text-gray-400 text-sm">
   <Container className="py-8 md:py-16 flex flex-col lg:flex-row gap-8 justify-between">
     <div class="lg:max-w-80">
       <div class="mb-2">
@@ -55,9 +55,6 @@ const currentYear = new Date().getFullYear()
 </footer>
 
 <style>
-  .content{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.04) 100%);
-  }
   .footer-links a{
     text-decoration: underline;
     text-underline-offset: 4px;

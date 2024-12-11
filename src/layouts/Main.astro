@@ -1,4 +1,5 @@
 ---
+const { pathname } = Astro.url
 import Footer from '@/components/Footer.astro'
 import Head from '@/components/Head.astro'
 import Header from '@/components/Header.astro'
@@ -17,7 +18,7 @@ const { title, description, image } = Astro.props
 	<Head title=`${ title } | Dynamic Studio` description={ description } image={ image } />
 	<body data-scroll-container>
 		<Header/>
-		<main data-scroll-section class="mix-blend-screen overflow-x-hidden">
+		<main data-scroll-section class=`${ pathname === '/' ? 'mix-blend-screen' : '' } overflow-x-hidden`>
 			<slot/>
 			<Footer/>
 		</main>

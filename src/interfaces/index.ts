@@ -12,6 +12,17 @@ export interface Service {
   description: string
   image: string
   icon: 'websites' | 'e-commerce' | 'custom-software' | 'branding'
+  process?: Process[]
+  cta?: {
+    title: string
+    description: string
+  }
+}
+
+export interface Process {
+  title: string
+  description: string
+  icon?: string
 }
 
 export interface Project {

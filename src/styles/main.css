@@ -123,8 +123,6 @@ html {
   color: #fff;
   font-family: "IBM Plex Sans";
   font-weight: 300;
-  overflow-x: hidden;
-  scrollbar-width: none;
 }
 
 p{
@@ -187,4 +185,9 @@ p:last-child{
 
 .dyn-transition {
   transition: all cubic-bezier(0.32,0.72,0,1) 1s;
+}
+
+.surface{
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(40px);
 }

@@ -3,6 +3,7 @@ import Main from '@/layouts/Main.astro'
 import Container from '@/components/Container.astro'
 import { services } from '@/data'
 import { MainButton } from "@/components"
+import { Planning, Design, Development, Testing } from '@/components/Icons'
 
 export async function getStaticPaths() {
   return services.map((service) => ({
@@ -13,6 +14,14 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props
 const serviceData = services.find((s) => s.slug === service.slug)
+
+const iconMap = {
+  Planning: Planning,
+  Design: Design,
+  Development: Development,
+  Testing: Testing
+}
+
 ---
 
 <Main title={ serviceData?.title } description={ serviceData?.description }>
@@ -29,5 +38,35 @@ const serviceData = services.find((s) => s.slug === service.slug)
 				<img src={ serviceData?.image } data-scroll data-scroll-speed="1" class="rounded-lg aspect-[4/3] object-cover" alt="Our Services">
 			</div>
 		</section>
+		<section class="mt-12">
+			<h3 class="reveal-left text-2xl font-semibold mb-8">Our approach includes:</h3>
+			<ul class="flex gap-16">
+				{ serviceData?.process?.map(( item, index ) => {
+					const IconComponent = iconMap[ item.icon as keyof typeof iconMap ]
+					return (
+						<li class="flex-1 reveal-up">
+							<div>
+								<div class="bg-[rgba(255,255,255,0.06)] relative mb-4 flex items-center justify-center overflow-hidden rounded-full size-16 md:size-20 text-dynamicGreen">
+									{ IconComponent && <IconComponent width="32" /> }
+								</div>
+								<h4 class="text-4xl mb-2">{ item.title }</h4>							
+								<p>{ item.description }</p>
+							</div>
+						</li>
+					)
+				})}
+			</ul>
+		</section>
 	</Container>
+	<section class="-mb-[6%] reveal-fade relative">		
+		<div class="flex-1 z-20 absolute w-full h-full flex items-center">
+			<Container>
+				<div class="md:w-1/2" data-scroll data-scroll-speed="2">
+					<h2 class="reveal-left text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-medium">{ serviceData?.cta?.title }</h2>
+					<h3 class="reveal-left text-base md:text-lg my-6">{ serviceData?.cta?.description }</h3>
+				</div>
+			</Container>
+		</div>
+		<img src="/images/cta.webp" alt={ serviceData?.cta?.title } class="z-10 relative aspect-[3/4] md:aspect-video object-cover opacity-30 2xl:rounded-r-lg">
+	</section>
 </Main>

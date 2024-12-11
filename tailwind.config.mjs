@@ -33,7 +33,7 @@ export default {
           950: '#00343a',
         },
 				accent: 'var(--dyn-gradient)',
-        background: "#0A0A20",
+        background: "#0A0A20"
       },
 			fontFamily: {
         'ibm': ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],

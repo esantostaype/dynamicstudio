@@ -21,13 +21,13 @@ import { services } from '@/data'
       const renderIcon = (icon: string) => {
         switch (icon) {
           case 'websites':
-            return <Websites width='20' />
+            return <Websites width='32' />
           case 'e-commerce':
-            return <ECommerce width='20' />
+            return <ECommerce width='32' />
           case 'custom-software':
-            return <Software width='20' />
+            return <Software width='32' />
           case 'branding':
-            return <Branding width='20' />
+            return <Branding width='32' />
           default:
             return null
         }
@@ -41,7 +41,7 @@ import { services } from '@/data'
                   <h2 class="font-medium text-pretty relative z-20 text-lg md:text-xl lg:text-2xl group-hover:text-dynamicGreen transition-all duration-500">
                     { service.title }
                   </h2>
-                  <div class="size-12 flex-[0_0_48px] rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.16)] group-hover:text-dynamicGreen group-hover:border-dynamicGreen transition-all duration-500">
+                  <div class="size-16 flex-[0_0_64px] rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.16)] group-hover:text-dynamicGreen group-hover:border-dynamicGreen transition-all duration-500">
                     { renderIcon( service.icon )}
                   </div>
                 </div>

@@ -56,9 +56,9 @@ export const TextField: FC<Props> = ({
       'text-xs top-0': isFloating,
       'top-[26px]': !isFloating,
       'text-gray-400': !hasError && !isActive,
-      'text-dyn-green-500': isActive && !hasError,
+      'text-dynamicGreen': isActive && !hasError,
       'text-red-500': hasError,
-      'group-hover:text-dyn-green-500': !hasError && !isActive,
+      'group-hover:text-dynamicGreen': !hasError && !isActive,
     }
   )
 
@@ -79,9 +79,9 @@ export const TextField: FC<Props> = ({
       'h-32': typeField === "textarea",
       'h-16': typeField !== "textarea",
       'border-[rgba(255,255,255,0.12)]': !isActive && !hasError,
-      'border-dyn-green-500': isActive && !hasError,
+      'border-dynamicGreen': isActive && !hasError,
       'border-red-500': hasError,
-      'group-hover:border-dyn-green-500': !hasError && !isActive,
+      'group-hover:border-dynamicGreen': !hasError && !isActive,
     }
   )
 

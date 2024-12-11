@@ -23,12 +23,12 @@ const nav: Nav[] = [
   <nav class="xl:flex gap-4 hidden uppercase text-sm font-normal tracking-wide">
     { nav.map(({ label, path, active, isScrollLink }) => (
       <a 
-        class={`hover:text-dyn-green-400 py-8 px-4 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} 
+        class={`hover:text-dynamicGreen py-8 px-4 relative transition-all duration-300 ${ active ? "text-dynamicGreen" : "" }`} 
         href={ path }
         data-scroll-to={ isScrollLink ? path.replace('#', '') : null }
       >
         { label }
-        { active && <span class="absolute left-0 top-0 w-full h-[2px] bg-dyn-green-400" transition:name="active"></span> }
+        { active && <span class="absolute left-0 top-0 w-full h-[2px] bg-dynamicGreen" transition:name="active"></span> }
       </a>
       ))
     }

@@ -31,7 +31,7 @@ const { nav } = Astro.props
     <nav class="flex flex-col pt-7 gap-2 relative z-10">
       { nav.map(({ label, path, active, isScrollLink }) => (
         <a 
-          class={`hover:text-dyn-green-400 py-1 px-8 relative transition-all duration-300 ${ active ? "text-dyn-green-400" : "" }`} 
+          class={`hover:text-dynamicGreen py-1 px-8 relative transition-all duration-300 ${ active ? "text-dynamicGreen" : "" }`} 
           href={ path }
           data-scroll-to={ isScrollLink ? path.replace('#', '') : null }
         >

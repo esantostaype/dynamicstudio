@@ -8,13 +8,13 @@ import SectionTitle from '@/components/SectionTitle.astro'
   <span class="-mt-16 sm:mt-24 md:-mt-32 absolute" id="contact"></span>
   <div class="w-[calc(100%+3rem)] sm:w-[calc(100%+4rem)] md:w-full xl:w-[calc(100%+10rem)] -ml-6 sm:-ml-8 md:ml-0 xl:-ml-20 p-6 sm:p-8 md:p-12 lg:p-20 md:rounded-lg flex flex-col md:flex-row gap-8 sm:gap-12 md:gap-24 2xl:gap-32 content relative overflow-hidden">
     <div class="flex-1">
-      <SectionTitle className="mb-2 md:mb-4" title='Would you like more information?' subtitle='Contact us' />
+      <SectionTitle className="mb-2 md:mb-4" title='Would you like more information?' revealMode='left' subtitle='Contact us' />
       <div>
-        <h4 class="font-medium text-xl lg:text-2xl mb-2">Let us help you get the information you need!</h4>
-        <p>If you have any questions or need more details about our services or any other topic, feel free to reach out to us.</p>
+        <h4 class="font-medium text-xl lg:text-2xl mb-2 reveal-left delay-[80ms]">Let us help you get the information you need!</h4>
+        <p class="reveal-left delay-[120ms]">If you have any questions or need more details about our services or any other topic, feel free to reach out to us.</p>
       </div>
     </div>
-    <div class="flex-[0_0_50%]">
+    <div class="flex-[0_0_50%] reveal-fade">
       <ContactForm client:load/>
     </div>
   </div>

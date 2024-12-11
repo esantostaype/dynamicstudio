@@ -26,7 +26,7 @@ const projects: Project[] = [
 ---
 
 <ContainerFluid className="mt-24 sm:mt-40 md:mt-60 mb-12 md:mb-24 lg:mb-32">
-  <SectionTitle className='reveal-fade text-center z-50' title='Latest Projects' subtitle='Discover our Work' />
+  <SectionTitle revealMode='up' className='text-center z-50' title='Latest Projects' subtitle='Discover our Work' />
   <ul class="flex flex-col md:flex-row gap-4 md:gap-6" id="project-list">
     { projects.map(( project, index ) => (
       <li class={`group relative flex-1 h-[32vw] reveal-fade dyn-transition project-item ${index === 1 ? 'expanded' : ''}`}>

@@ -7,43 +7,24 @@ import Marquee from '@/sections/Marquee.astro'
 
 const title = "Unlock Revenue Growth for Your Business"
 const description = "At Dynamic Studio, we empower your business to reach its full potential with tailored solutions designed to drive growth and deliver results."
-
 ---
 
 <Main title=`Our Services: ${ title }` description={ description }>
-	<Container className="pt-24 md:pt-[124px] pb-12 lg:pb-24 xl:pb-44">
+	<Container className="pt-24 md:pt-[104px] pb-12 lg:pb-24 xl:pb-44">
 		<section class="flex flex-col md:flex-row items-center gap-6 md:gap-12">
 			<div class="flex-1 relative z-20">
 				<h2 class="reveal-left text-3xl lg:text-4xl xl:text-5xl font-light mb-4">Our Services</h2>
-				<h1 class="reveal-left text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-medium 2xl:w-[140%]">{ title }</h1>
-				<h3 class="reveal-left text-lg my-6">{ description }</h3>
-				<div class="button reveal-left">
+				<h1 class="reveal-left delay-[40ms] text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-medium 2xl:w-[140%]">{ title }</h1>
+				<h3 class="reveal-left delay-[80ms] text-lg my-6">{ description }</h3>
+				<div class="delay-[120ms] reveal-left">
 					<MainButton client:only>Get a Quote Now</MainButton>
 				</div>
 			</div>
 			<div class="flex-1 relative z-10 reveal-up">
-				<img src="/images/services.webp" data-scroll data-scroll-speed="2" class="rounded-2xl aspect-[4/3] object-cover" alt="Our Services">
+				<img src="/images/services.webp" data-scroll data-scroll-speed="1" class="rounded-lg aspect-[4/3] object-cover" alt="Our Services">
 			</div>
 		</section>
 	</Container>
 	<ServicesList/>
 	<Marquee/>
 </Main>
-
-<style>
-	h2.reveal-left {
-		transition-delay: 0ms;
-	}
-
-	h1.reveal-left {
-		transition-delay: 40ms;
-	}
-
-	h3.reveal-left {
-		transition-delay: 80ms;
-	}
-
-	.button {
-		transition-delay: 120ms;
-	}
-</style>

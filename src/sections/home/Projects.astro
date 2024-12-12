@@ -43,7 +43,7 @@ const projects: Project[] = [
 </ContainerFluid>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const projectItem = document.querySelectorAll('.project-item')  
     projectItem.forEach(item => {
       item.addEventListener('mouseenter', () => {

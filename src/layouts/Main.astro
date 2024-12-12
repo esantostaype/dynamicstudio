@@ -33,7 +33,7 @@ const { title, description, image } = Astro.props
 
 <script>
 	import { RevealFade, RevealLeft, RevealUp } from '@/scripts/reveal'
-	document.addEventListener("DOMContentLoaded", () => {
+	document.addEventListener("astro:page-load", () => {
 		const revealUp = new RevealUp()
     revealUp.observe()
 		const revealLeft = new RevealLeft()

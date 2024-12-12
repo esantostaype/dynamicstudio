@@ -1,5 +1,6 @@
 @import '@/styles/locomotive-scroll.css';
 
+
 :root {
   --background: #0A0A20;
   --dyn-green-50: #eeffe4;
@@ -123,6 +124,8 @@ html {
   color: #fff;
   font-family: "IBM Plex Sans";
   font-weight: 300;
+  overflow-x: hidden;
+  scrollbar-width: none;
 }
 
 p{

@@ -40,7 +40,7 @@ const nav: Nav[] = [
 <script>
   import LocomotiveScroll from 'locomotive-scroll'
 
-  document.addEventListener("astro:page-load", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector("header") as HTMLElement
     const scroll = new LocomotiveScroll({
       el: document.querySelector("[data-scroll-container]") as HTMLElement,

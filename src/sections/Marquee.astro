@@ -33,7 +33,7 @@ const items = [
 </section>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     function Marquee(selector: string, speed: number): void {
       const parentSelector = document.querySelector(selector)
       if (!parentSelector) {

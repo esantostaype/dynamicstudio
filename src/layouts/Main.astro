@@ -32,7 +32,6 @@ const { title, description, image } = Astro.props
 </style>
 
 <script>
-	import LocomotiveScroll from 'locomotive-scroll'
 	import { RevealFade, RevealLeft, RevealUp } from '@/scripts/reveal'
 	document.addEventListener("DOMContentLoaded", () => {
 		const revealUp = new RevealUp()
@@ -41,9 +40,5 @@ const { title, description, image } = Astro.props
     revealLeft.observe()
 		const revealFade = new RevealFade()
     revealFade.observe()
-		new LocomotiveScroll({
-			el: document.querySelector("[data-scroll-container]") as HTMLElement,
-			smooth: true
-		}
-	)})
+	})
 </script>

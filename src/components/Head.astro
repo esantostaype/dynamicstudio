@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
 	title?: string
@@ -63,4 +64,5 @@ const {
   <link rel="preload" href="/fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="/fonts/IBMPlexSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="/fonts/IBMPlexSans-SemiBoldItalic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <ViewTransitions/>
 </head>

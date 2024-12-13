@@ -31,19 +31,63 @@ const { title, description, image } = Astro.props
 	@import '@/styles/main.css';
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-<script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script>
-
 <script>
-	import { RevealFade, RevealLeft, RevealUp } from '@/scripts/reveal'
 
-	document.addEventListener("DOMContentLoaded", () => {
-		const revealUp = new RevealUp()
-    revealUp.observe()
-		const revealLeft = new RevealLeft()
-    revealLeft.observe()
-		const revealFade = new RevealFade()
-    revealFade.observe()
-	})
+import LocomotiveScroll from 'locomotive-scroll'
+import { RevealFade, RevealLeft, RevealUp } from '@/scripts/reveal'
+
+interface ScrollInstance {
+  destroy: () => void
+}
+
+let locomotiveScroll: ScrollInstance | null = null
+
+const initScroll = (): void => {
+  if ( locomotiveScroll ) {
+    locomotiveScroll.destroy()
+  }
+
+  window.scrollTo(0, 0)
+
+  const revealUp = new RevealUp()
+  revealUp.observe()
+  const revealLeft = new RevealLeft()
+  revealLeft.observe()
+  const revealFade = new RevealFade()
+  revealFade.observe()
+
+  locomotiveScroll = new LocomotiveScroll
+}
+
+const handleHeaderScroll = (): void => {
+  const header = document.querySelector('header')
+  if (!header) return
+
+  const add_class_on_scroll = (): void => header.classList.add("onScroll")
+  const remove_class_on_scroll = (): void => header.classList.remove("onScroll")
+
+  const scrollHandler = (): void => {
+    const scrollpos = window.scrollY
+    if (scrollpos >= header.offsetHeight) {
+      add_class_on_scroll()
+    } else {
+      remove_class_on_scroll()
+    }
+  }
+
+  window.addEventListener('scroll', scrollHandler)
+}
+
+document.addEventListener("astro:page-load", () => {
+  initScroll()
+  handleHeaderScroll()
+})
+
+document.addEventListener("astro:before-preparation", () => {
+  if (locomotiveScroll) {
+    locomotiveScroll.destroy()
+    locomotiveScroll = null
+  }
+})
+
 </script>

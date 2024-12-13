@@ -18,6 +18,10 @@ import { services } from '@/data'
   </ul> -->
   <ul class="flex flex-wrap gap-4 md:gap-6 xl:gap-8">
     { services.map(( service, index ) => {
+
+      const scrollSpeedValues = [0, 0.075, 0.125, 0.175];
+      const speed = scrollSpeedValues[index % scrollSpeedValues.length]
+
       const renderIcon = (icon: string) => {
         switch (icon) {
           case 'websites':
@@ -34,7 +38,7 @@ import { services } from '@/data'
       }
       return (
         <li class="flex-[0_0_calc(100%)] md:flex-[0_0_calc(50%-12px)] lg:flex-[0_0_calc(50%-16px)] xl:flex-[0_0_calc(25%-24px)] group reveal-up flex flex-col">
-          <a href={`/services/${ service.slug }`} data-scroll data-scroll-speed={`-${ index / 1.5 }`} class="flex flex-1 flex-col">
+          <a href={`/services/${ service.slug }`} data-scroll data-scroll-speed={ speed } class="flex flex-1 flex-col">
             <div class="border flex-1 flex-col flex border-[rgba(255,255,255,0.16)] group-hover:border-transparent group-hover:bg-[rgba(255,255,255,0.06)] transition-all duration-500 p-2 md:p-4 overflow-hidden relative rounded md:rounded-lg">
               <div class="p-4 flex flex-col flex-1">
                 <div class="flex justify-between items-center gap-4">

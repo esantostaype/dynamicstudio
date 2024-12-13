@@ -35,7 +35,7 @@ const iconMap = {
 				</div>
 			</div>
 			<div class="flex-1 relative z-10 reveal-up">
-				<img src={ serviceData?.image } data-scroll data-scroll-speed="1" class="rounded-lg aspect-[4/3] object-cover" alt="Our Services">
+				<img src={ serviceData?.image } data-scroll data-scroll-speed="0.1" class="rounded-lg aspect-[4/3] object-cover" alt="Our Services">
 			</div>
 		</section>
 		<section class="mt-12">
@@ -61,12 +61,12 @@ const iconMap = {
 	<section class="-mb-[6%] reveal-fade relative">		
 		<div class="flex-1 z-20 absolute w-full h-full flex items-center">
 			<Container>
-				<div class="md:w-1/2" data-scroll data-scroll-speed="3">
+				<div class="md:w-1/2" data-scroll data-scroll-speed="0.3">
 					<h2 class="reveal-left text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-medium">{ serviceData?.cta?.title }</h2>
 					<h3 class="reveal-left text-base md:text-lg my-6">{ serviceData?.cta?.description }</h3>
 				</div>
 			</Container>
 		</div>
-		<img src="/images/cta.webp" alt={ serviceData?.cta?.title }  data-scroll data-scroll-speed="1" class="z-10 relative aspect-[3/4] md:aspect-video object-cover opacity-30 2xl:rounded-r-lg">
+		<img src="/images/cta.webp" alt={ serviceData?.cta?.title }  data-scroll data-scroll-speed="0.1" class="z-10 relative aspect-[3/4] md:aspect-video object-cover opacity-30 2xl:rounded-r-lg">
 	</section>
 </Main>

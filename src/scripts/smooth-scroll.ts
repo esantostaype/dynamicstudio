@@ -1,139 +1,130 @@
-// src/scripts/smoothScroll.ts
-interface ScrollElement {
-  element: HTMLElement;
-  scrollSpeed: number;
-  originalTransform: string;
-}
-
+// src/scripts/SmoothScroll.ts
 export class SmoothScroll {
-  private currentScroll: number = 0;
-  private targetScroll: number = 0;
-  private ease: number = 0.1;
-  private rafId: number | null = null;
-  private scrollElements: ScrollElement[] = [];
-
-  constructor(private options: {
-    ease?: number;
-    maxScrollBehavior?: 'clamp' | 'wrap';
-  } = {}) {
-    this.ease = options.ease ?? 0.1;
+  private container: HTMLElement
+  private scrollingElement: HTMLElement
+  private smoothData: {
+    current: number
+    target: number
+    ease: number
+    lastScroll: number
+    maxScroll: number
   }
+  private rafId: number | null
+  private resizeObserver: ResizeObserver
 
-  public init(): void {
-    this.addEventListeners();
-    this.initScrollElements();
-    this.startAnimationLoop();
-  }
-
-  private initScrollElements(): void {
-    // Seleccionar elementos con data-scroll-speed
-    const elements = document.querySelectorAll('[data-scroll-speed]');
+  constructor(containerSelector: string = '[data-scroll-container]', ease: number = 0.1) {
+    this.container = document.querySelector(containerSelector) as HTMLElement
+    this.scrollingElement = this.container.querySelector('[data-scroll-section]') as HTMLElement
     
-    this.scrollElements = Array.from(elements).map(el => {
-      const element = el as HTMLElement;
-      const scrollSpeed = parseFloat(element.dataset.scrollSpeed || '0');
-      
-      return {
-        element,
-        scrollSpeed,
-        originalTransform: element.style.transform || ''
-      };
-    });
-  }
-
-  private updateScrollElements(): void {
-    this.scrollElements.forEach(item => {
-      // Transformar velocidades negativas en un factor de ralentización
-      const effectiveSpeed = item.scrollSpeed >= 0 
-        ? item.scrollSpeed 
-        : Math.abs(item.scrollSpeed) / 2;
-      
-      // Calcular el desplazamiento basado en la velocidad de scroll
-      const movement = this.currentScroll * effectiveSpeed;
-      
-      // Aplicar transformación
-      if (item.scrollSpeed !== 0) {
-        // Preservar transformaciones originales si existían
-        const originalTransform = item.originalTransform ? `${item.originalTransform} ` : '';
-        
-        // Si la velocidad es negativa, se mueve más lento
-        const transformDirection = item.scrollSpeed >= 0 ? '-' : '';
-        
-        item.element.style.transform = `${originalTransform}translateY(${transformDirection}${movement}px)`;
-      }
-    });
-  }
-
-  private addEventListeners(): void {
-    window.addEventListener('wheel', this.handleWheel.bind(this), { passive: false });
-    this.setupInternalLinks();
-  }
-
-  private handleWheel(event: WheelEvent): void {
-    event.preventDefault();
-    
-    this.targetScroll += event.deltaY;
-    
-    // Manejar límites del scroll
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    
-    if (this.options.maxScrollBehavior === 'wrap') {
-      this.targetScroll = this.targetScroll % maxScroll;
-    } else {
-      this.targetScroll = Math.max(0, Math.min(this.targetScroll, maxScroll));
+    this.smoothData = {
+      current: 0,
+      target: 0,
+      ease,
+      lastScroll: 0,
+      maxScroll: 0
     }
+    
+    this.rafId = null
+    this.resizeObserver = new ResizeObserver(() => this.updateDimensions())
   }
 
-  private setupInternalLinks(): void {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = (anchor as HTMLAnchorElement).getAttribute('href');
-        const targetElement = targetId ? document.querySelector(targetId) : null;
-        
-        if (targetElement) {
-          this.scrollToElement(targetElement);
-        }
-      });
-    });
+  init() {
+    // Set initial styles
+    document.body.style.overflow = 'hidden'
+    this.container.style.position = 'fixed'
+    this.container.style.width = '100%'
+    this.container.style.height = '100%'
+    this.container.style.overflow = 'hidden'
+    
+    this.scrollingElement.style.transform = 'translateY(0)'
+    this.scrollingElement.style.willChange = 'transform'
+
+    // Initialize dimensions and events
+    this.updateDimensions()
+    this.addEvents()
+    this.render()
   }
 
-  public scrollToElement(element: Element, offset: number = 0): void {
-    this.targetScroll = element.getBoundingClientRect().top + window.scrollY + offset;
+  private updateDimensions() {
+    const containerHeight = this.container.clientHeight
+    const contentHeight = this.scrollingElement.scrollHeight
+    this.smoothData.maxScroll = -(contentHeight - containerHeight)
   }
 
-  private startAnimationLoop(): void {
-    const update = () => {
-      // Interpolar el scroll actual hacia el scroll objetivo
-      this.currentScroll += (this.targetScroll - this.currentScroll) * this.ease;
-      
-      // Aplicar transformación para smooth scroll
-      window.scrollTo(0, this.currentScroll);
-      
-      // Actualizar elementos con scroll diferencial
-      this.updateScrollElements();
-      
-      // Continuar el bucle de animación
-      this.rafId = requestAnimationFrame(update);
-    };
-
-    update();
+  private addEvents() {
+    // Watch for resize
+    this.resizeObserver.observe(this.scrollingElement)
+    
+    // Handle wheel event
+    window.addEventListener('wheel', this.handleWheel.bind(this), { passive: false })
+    
+    // Handle touch events for mobile
+    window.addEventListener('touchstart', this.handleTouchStart.bind(this))
+    window.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false })
+    window.addEventListener('touchend', this.handleTouchEnd.bind(this))
   }
 
-  // Método para actualizar elementos de scroll dinámicamente
-  public refreshScrollElements(): void {
-    this.initScrollElements();
+  private handleWheel(e: WheelEvent) {
+    e.preventDefault()
+    this.smoothData.target += e.deltaY * -1
+    this.clampTarget()
   }
-}
 
-// Función de inicialización para Astro
-export function initSmoothScroll() {
-  const smoothScroll = new SmoothScroll({
-    ease: 0.1,
-    maxScrollBehavior: 'clamp'
-  });
+  private touchY: number = 0
+  private lastTouchY: number = 0
 
-  smoothScroll.init();
+  private handleTouchStart(e: TouchEvent) {
+    this.touchY = e.touches[0].clientY
+    this.lastTouchY = this.touchY
+  }
 
-  return smoothScroll;
+  private handleTouchMove(e: TouchEvent) {
+    e.preventDefault()
+    this.touchY = e.touches[0].clientY
+    const delta = this.touchY - this.lastTouchY
+    this.smoothData.target += delta * 2
+    this.lastTouchY = this.touchY
+    this.clampTarget()
+  }
+
+  private handleTouchEnd() {
+    // Add momentum if needed
+  }
+
+  private clampTarget() {
+    this.smoothData.target = Math.max(this.smoothData.maxScroll, Math.min(0, this.smoothData.target))
+  }
+
+  private render() {
+    const diff = this.smoothData.target - this.smoothData.current
+    this.smoothData.current += diff * this.smoothData.ease
+
+    // Apply transform
+    this.scrollingElement.style.transform = `translateY(${this.smoothData.current}px)`
+
+    // Update scroll position for parallax effects or other scroll-based animations
+    document.documentElement.style.setProperty('--scroll', this.smoothData.current.toString())
+
+    this.rafId = requestAnimationFrame(this.render.bind(this))
+  }
+
+  destroy() {
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId)
+    }
+    this.resizeObserver.disconnect()
+    window.removeEventListener('wheel', this.handleWheel.bind(this))
+    window.removeEventListener('touchstart', this.handleTouchStart.bind(this))
+    window.removeEventListener('touchmove', this.handleTouchMove.bind(this))
+    window.removeEventListener('touchend', this.handleTouchEnd.bind(this))
+    
+    // Reset styles
+    document.body.style.overflow = ''
+    this.container.style.position = ''
+    this.container.style.width = ''
+    this.container.style.height = ''
+    this.container.style.overflow = ''
+    this.scrollingElement.style.transform = ''
+    this.scrollingElement.style.willChange = ''
+  }
 }

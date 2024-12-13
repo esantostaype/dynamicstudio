@@ -37,41 +37,6 @@ const nav: Nav[] = [
   <NavMobile nav={ nav }/>
 </header>
 
-<script>
-  import LocomotiveScroll from 'locomotive-scroll'
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector("header") as HTMLElement
-    const scroll = new LocomotiveScroll({
-      el: document.querySelector("[data-scroll-container]") as HTMLElement,
-      smooth: true
-    })
-
-    // Scroll event handling remains the same
-    scroll.on("scroll", ({ scroll }) => {
-      if (scroll.y >= 50) {
-        header.classList.add("onScroll")
-      } else {
-        header.classList.remove("onScroll")
-      }
-    })
-
-    // Add click event listener for scroll links
-    document.querySelectorAll('a[data-scroll-to]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const target = link.getAttribute('data-scroll-to')
-        if (target) {
-          e.preventDefault()
-          const contactSection = document.getElementById(target)
-          if (contactSection) {
-            scroll.scrollTo(contactSection)
-          }
-        }
-      })
-    })
-  })
-</script>
-
 <style>
   .onScroll {
     background-color: rgba(10, 10, 32, 0.8);

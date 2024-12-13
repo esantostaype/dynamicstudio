@@ -47,7 +47,7 @@ const { nav } = Astro.props
 </section>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const openNavButton = document.querySelector(".open-nav-button") as HTMLElement
     const closeNavButton = document.querySelector(".close-nav-button") as HTMLElement
     const closeNavBg = document.querySelector(".close-nav-bg") as HTMLElement

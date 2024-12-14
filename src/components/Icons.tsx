@@ -97,6 +97,14 @@ export const Arrow = ({ width, fill }: Props) => {
   )
 }
 
+export const ArrowDown = ({ width, fill }: Props) => {
+  return (
+    <Icon width={ width } fill={ fill }>
+      <path d="M23.8,25.8l-5.4,5.3c-.6.6-1.5,1-2.4,1-.9,0-1.7-.3-2.4-1l-5.4-5.2c-.3-.3-.3-.7,0-.9.3-.3.7-.3.9,0l5.4,5.2c.2.2.5.4.8.5V.7c0-.4.3-.7.7-.7s.7.3.7.7v29.9c.3,0,.5-.3.7-.5l5.4-5.3c.3-.3.7-.3.9,0,.3.3.3.7,0,.9h0Z"/>
+    </Icon>
+  )
+}
+
 export const Chat = ({ width, fill }: Props) => {
   return (
     <Icon width={ width } fill={ fill }>

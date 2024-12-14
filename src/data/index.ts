@@ -1,4 +1,3 @@
-import { Websites } from '@/components/Icons'
 import type { Service } from '@/interfaces'
 
 export const services: Service[] = [

@@ -43,9 +43,11 @@ const iconMap = {
 			<ul class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] xl:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] 2xl:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-16">
 				{ serviceData?.process?.map(( item, index ) => {
 					const IconComponent = iconMap[ item.icon as keyof typeof iconMap ]
+					const scrollSpeedValues = [0, 0.075, 0.125, 0.175];
+					const speed = scrollSpeedValues[index % scrollSpeedValues.length]
 					return (
 						<li class="flex-1 reveal-up">
-							<div>
+							<div data-scroll data-scroll-speed={ speed }>
 								<div class="bg-[rgba(255,255,255,0.06)] relative mb-4 flex items-center justify-center overflow-hidden rounded-full size-16 md:size-20 text-dynamicGreen">
 									{ IconComponent && <IconComponent width="32" /> }
 								</div>
@@ -61,7 +63,7 @@ const iconMap = {
 	<section class="-mb-[6%] reveal-fade relative">		
 		<div class="flex-1 z-20 absolute w-full h-full flex items-center">
 			<Container>
-				<div class="md:w-1/2" data-scroll data-scroll-speed="0.3">
+				<div class="md:w-1/2" data-scroll data-scroll-speed="0.2">
 					<h2 class="reveal-left text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-medium">{ serviceData?.cta?.title }</h2>
 					<h3 class="reveal-left text-base md:text-lg my-6">{ serviceData?.cta?.description }</h3>
 				</div>

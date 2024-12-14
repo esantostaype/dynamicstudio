@@ -18,7 +18,7 @@ const { title, description, image } = Astro.props
 	<Head title=`${ title } | Dynamic Studio` description={ description } image={ image } />
 	<body data-scroll-container>
 		<Header/>
-		<main data-scroll-section class=`${ pathname === '/' ? 'mix-blend-screen' : '' } overflow-x-hidden`>
+		<main data-scroll-section>
 			<slot/>
 			<Footer/>
 		</main>
@@ -34,6 +34,7 @@ const { title, description, image } = Astro.props
 <script>
 
 import LocomotiveScroll from 'locomotive-scroll'
+import { MasonryGrid } from '@/scripts/masonry'
 import { RevealFade, RevealLeft, RevealUp } from '@/scripts/reveal'
 
 interface ScrollInstance {
@@ -81,6 +82,26 @@ const handleHeaderScroll = (): void => {
 document.addEventListener("astro:page-load", () => {
   initScroll()
   handleHeaderScroll()
+
+  const container = document.querySelector('.masonry-container');
+  if (container instanceof HTMLElement) {
+    const masonry = new MasonryGrid(container, {
+      defaultColumns: 2,  // Configuración por defecto para pantallas grandes
+      defaultGap: 40,
+      breakpoints: [        
+        {
+          width: 768,    // Para pantallas <= 768px
+          columns: 2,
+          gap: 20
+        },
+        {
+          width: 400,    // Para pantallas <= 768px
+          columns: 1,
+          gap: 30
+        }
+      ]
+    });
+  }
 })
 
 document.addEventListener("astro:before-preparation", () => {

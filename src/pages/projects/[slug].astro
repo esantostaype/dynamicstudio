@@ -1,0 +1,39 @@
+---
+import Main from '@/layouts/Main.astro'
+import Container from '@/components/Container.astro'
+import { projects } from '@/data/projects'
+import { Websites, ECommerce, Software, Branding } from '@/components/Icons'
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }))
+}
+
+const { project } = Astro.props
+const projectData = projects.find((s) => s.slug === project.slug)
+
+---
+
+<Main title={ projectData?.title }>
+	<Container className="py-24 md:py-24">
+		<div class="flex gap-4 mb-4 md:mb-8 items-center">
+			<h1 class="reveal-left text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-medium">{ projectData?.title }</h1>
+			<div class="reveal-left flex items-center gap-2 pt-2 uppercase">
+        { projectData?.icon === 'websites' && <Websites width="24" /> }
+        { projectData?.icon === 'e-commerce' && <ECommerce width="24" /> }
+        { projectData?.icon === 'custom-software' && <Software width="24" /> }
+        { projectData?.icon === 'branding' && <Branding width="24" /> }
+        <span>{ projectData?.category }</span>
+      </div>
+		</div>
+		<ul class="min-h-screen">
+			{ projectData?.gallery?.map(( image, index ) => (
+				<li class="reveal-up">
+					<img width="1280" height="720" alt={`Dynamic Studio - ${ project.title } - 0${ index + 1 }`} src={ image } class="relative size-full object-cover" />
+				</li>
+			))}
+		</ul>
+	</Container>
+</Main>

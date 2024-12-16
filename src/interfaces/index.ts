@@ -28,7 +28,10 @@ export interface Process {
 export interface Project {
   slug: string
   title: string
-  image: string
+  thumbnail: string
+  gallery?: string[]
   category: string
+  icon?: 'websites' | 'custom-software' | 'e-commerce' | 'branding'
   aspect?: string
+  featured?: boolean
 }

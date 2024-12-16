@@ -1,7 +1,7 @@
 ---
 import ContainerFluid from '@/components/ContainerFluid.astro'
 import { Websites, ECommerce, Software, Branding } from '@/components/Icons'
-import { services } from '@/data'
+import { services } from '@/data/services'
 
 ---
 
@@ -29,7 +29,7 @@ import { services } from '@/data'
       return (
         <li class="flex-[0_0_calc(100%)] md:flex-[0_0_calc(50%-12px)] lg:flex-[0_0_calc(50%-16px)] xl:flex-[0_0_calc(25%-24px)] group reveal-up flex flex-col">
           <a href={`/services/${ service.slug }`} data-scroll data-scroll-speed={ speed } class="flex flex-1 flex-col">
-            <div class="border flex-1 flex-col flex border-[rgba(255,255,255,0.16)] group-hover:border-transparent group-hover:bg-[rgba(255,255,255,0.06)] transition-all duration-500 p-2 md:p-4 overflow-hidden relative rounded md:rounded-lg">
+            <div class="border flex-1 flex-col flex border-[rgba(255,255,255,0.16)] group-hover:border-transparent group-hover:bg-[rgba(255,255,255,0.06)] transition-all duration-500 p-2 md:p-4 overflow-hidden relative rounded md:rounded">
               <div class="p-4 flex flex-col flex-1">
                 <div class="flex justify-between items-center gap-4">
                   <h2 class="font-medium text-pretty relative z-20 text-lg md:text-xl lg:text-2xl group-hover:text-dynamicGreen transition-all duration-500">

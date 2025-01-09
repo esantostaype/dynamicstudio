@@ -31,7 +31,7 @@ const projectData = projects.find((s) => s.slug === project.slug)
 		<ul class="min-h-screen">
 			{ projectData?.gallery?.map(( image, index ) => (
 				<li class="reveal-up">
-					<img width="1280" height="720" alt={`Dynamic Studio - ${ project.title } - 0${ index + 1 }`} src={ image } class="relative size-full object-cover" />
+					<img width="1280" height="720" alt={`Dynamic Studio - ${ project.title } - 0${ index + 1 }`} src={ image } loading="lazy" class="relative size-full object-cover" />
 				</li>
 			))}
 		</ul>

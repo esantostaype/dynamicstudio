@@ -3,7 +3,7 @@ import Main from '@/layouts/Main.astro'
 import Container from '@/components/Container.astro'
 import { services } from '@/data/services'
 import { MainButton } from "@/components"
-import { Planning, Design, Development, Testing } from '@/components/Icons'
+import { Content, Design, Development, Launch, Planning, Testing } from '@/components/Icons'
 
 export async function getStaticPaths() {
   return services.map((service) => ({
@@ -19,7 +19,9 @@ const iconMap = {
   Planning: Planning,
   Design: Design,
   Development: Development,
-  Testing: Testing
+  Testing: Testing,
+  Launch: Launch,
+  Content: Content
 }
 
 ---
@@ -35,7 +37,7 @@ const iconMap = {
 				</div>
 			</div>
 			<div class="flex-1 relative z-10 reveal-up">
-				<img src={ serviceData?.image } data-scroll data-scroll-speed="0.1" class="rounded aspect-[4/3] object-cover" alt="Our Services">
+				<img src={ serviceData?.image } data-scroll data-scroll-speed="0.1" loading="lazy" class="rounded aspect-[4/3] object-cover" alt="Our Services">
 			</div>
 		</section>
 		<section class="mt-12">
@@ -69,6 +71,6 @@ const iconMap = {
 				</div>
 			</Container>
 		</div>
-		<img src="/images/cta.webp" alt={ serviceData?.cta?.title }  data-scroll data-scroll-speed="0.1" class="z-10 relative aspect-[3/4] md:aspect-video object-cover opacity-30 2xl:rounded-r-lg">
+		<img src="/images/cta.webp" alt={ serviceData?.cta?.title } loading="lazy" data-scroll data-scroll-speed="0.1" class="z-10 relative aspect-[3/4] md:aspect-video object-cover opacity-30 2xl:rounded-r-lg">
 	</section>
 </Main>

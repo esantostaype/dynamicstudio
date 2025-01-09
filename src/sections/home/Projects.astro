@@ -10,7 +10,7 @@ import { projects } from '@/data/projects'
     { projects.filter( project => project.featured ).map(( project, index ) => (
       <li class={`group relative flex-1 h-[32vw] reveal-fade dyn-transition project-item ${index === 1 ? 'expanded' : ''}`}>
         <a href={`/projects/${ project.slug }`}>
-          <img transition:name={ index === 0 ? `image${ project.slug }` : undefined } width="1280" height="720" alt={`Dynamic Studio - ${ project.title }`} src={ project.thumbnail } class="rounded relative size-full object-cover" />
+          <img transition:name={ index === 0 ? `image${ project.slug }` : undefined } loading="lazy" width="1280" height="720" alt={`Dynamic Studio - ${ project.title }`} src={ project.thumbnail } class="rounded relative size-full object-cover" />
           <div class="project-item__caption md:w-0 md:opacity-0 overflow-hidden flex flex-col md:flex-row justify-between md:items-center py-2 transition-all duration-500">
             <h2 class="text-xl md:text-2xl font-medium text-nowrap">{ project.title }</h2>
             <span class="text-sm md:text-base uppercase">{ project.category }</span>

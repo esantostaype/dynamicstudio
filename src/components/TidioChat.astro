@@ -1,0 +1,12 @@
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const tidioScriptId = 'tidio-chat-script'
+    if (!document.getElementById(tidioScriptId)) {
+      const script = document.createElement('script')
+      script.id = tidioScriptId
+      script.src = '//code.tidio.co/ialhy8rbofepwpkagbkefxal607f2oag.js'
+      script.async = true
+      document.body.appendChild(script)
+    }
+  })
+</script>

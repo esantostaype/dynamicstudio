@@ -57,7 +57,15 @@ const initScroll = (): void => {
   const revealFade = new RevealFade()
   revealFade.observe()
 
-  locomotiveScroll = new LocomotiveScroll
+  locomotiveScroll = new LocomotiveScroll({
+    smooth: true,
+    mobile: {
+      smooth: false
+    },
+    tablet: {
+      smooth: false
+    }
+  } as any)
 }
 
 const handleHeaderScroll = (): void => {

@@ -28,7 +28,7 @@ export const ContactForm = () => {
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
           setError(false)
-          const response = await fetch(`https://backend.dynamicstudio.us/api/contact-us`, {
+          const response = await fetch(`${ import.meta.env.PUBLIC_API_URL }/contact-us`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

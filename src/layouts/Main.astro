@@ -19,7 +19,7 @@ const { title, description, image } = Astro.props
 	<Head title=`${ title } | Dynamic Studio` description={ description } image={ image } />
 	<body data-scroll-container>
 		<Header/>
-		<main data-scroll-section>
+		<main data-scroll-section class="overflow-x-hidden">
 			<slot/>
 			<Footer/>
 		</main>

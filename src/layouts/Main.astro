@@ -3,6 +3,7 @@ const { pathname } = Astro.url
 import Footer from '@/components/Footer.astro'
 import Head from '@/components/Head.astro'
 import Header from '@/components/Header.astro'
+import { Quote } from '@/components/Quote'
 import TidioChat from '@/components/TidioChat.astro'
 import ChatButton from '@/components/ui/ChatButton.astro'
 import  SpeedInsights  from "@vercel/speed-insights/astro"
@@ -23,7 +24,7 @@ const { title, description, image } = Astro.props
 			<slot/>
 			<Footer/>
 		</main>
-		<!-- <ChatButton/> -->
+		<Quote/>
 		<SpeedInsights/>
     <TidioChat/>
 	</body>
